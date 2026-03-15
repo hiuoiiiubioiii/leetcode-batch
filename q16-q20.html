@@ -1,0 +1,79 @@
+<tr>
+                    <td>16</td>
+                    <td><b>3Sum Closest</b></td>
+                    <td><span class="badge-bf">Generate All Triplets</span> Use three nested loops to find all sums and track the one with the minimum absolute difference to the target.</td>
+                    <td>3D Cube + Min Tracker</td>
+                    <td>Draw three nested rotating gears. Draw a side box holding `closest_sum`. Update it every time a new gear combo produces a smaller `abs(target - sum)`.</td>
+                    <td><span class="badge-opt">Sort + Anchor & Squeeze</span></td>
+                    <td>The Magnetic Pointers</td>
+                    <td>Sort the array. Pin pointer 'i'. Move L and R inward just like 3Sum, but instead of looking for exactly 0, you move L right if sum < target, and R left if sum > target.</td>
+                    <td>Draw a sorted array. Pin 'i'. Place L and R. Write the `target`. Draw arrows pulling L or R inward trying to get the sum magnetically closer to the target value.</td>
+                    <td>N * (Squeezing Line)</td>
+                    <td>Draw an outer loop representing 'i' (O(N)). Inside, draw a straight line for the L/R squeeze (O(N)). Total time is O(N²).</td>
+                    <td>O(1) space, but O(N³) time makes it unusable.</td>
+                    <td>Draw a single `closest_sum` integer variable. Space is O(1) or O(N) depending purely on the sorting algorithm.</td>
+                </tr>
+
+                <tr>
+                    <td>17</td>
+                    <td><b>Letter Combinations of a Phone Number</b></td>
+                    <td><span class="badge-bf">Iterative Cross-Product</span> Create an array of strings. For every new digit, multiply the existing array size by 3 or 4 and append the new letters.</td>
+                    <td>Exploding Array</td>
+                    <td>Draw a small array `["a", "b", "c"]`. Draw an arrow to a massive new array where every element is copied 3 times to append the next letters. O(4^N) space chaos.</td>
+                    <td><span class="badge-opt">Backtracking (DFS)</span></td>
+                    <td>Decision Tree (Depth-First)</td>
+                    <td>Build combinations character by character. Go as deep as possible (length of input digits), record the word, then backtrack one step and try the next letter.</td>
+                    <td>Draw a root node. Branch out to 'a', 'b', 'c'. From 'a', branch to 'd', 'e', 'f'. Trace a line down to "ad", then back up to 'a', then down to "ae".</td>
+                    <td>Tree Leaf Counter</td>
+                    <td>Draw a tree with a branching factor of 4 (worst case for digits 7 and 9). Draw the depth as N. Note that you visit 4^N leaves. Time is O(4^N * N).</td>
+                    <td>Draw giant intermediate arrays taking up huge chunks of memory during the iterative build.</td>
+                    <td>Draw a single string builder (or character array) growing and shrinking. Also draw the recursion stack (depth N). Total space is O(N).</td>
+                </tr>
+
+                <tr>
+                    <td>18</td>
+                    <td><b>4Sum</b></td>
+                    <td><span class="badge-bf">Generate All Quadruplets</span> Four nested loops scanning every combination of four numbers.</td>
+                    <td>4D Hypercube</td>
+                    <td>Write out four nested loops (i, j, k, l). Note the complexity as N * (N-1) * (N-2) * (N-3). A massive O(N⁴) time block.</td>
+                    <td><span class="badge-opt">Sort + Two Anchors + Squeeze</span></td>
+                    <td>Dual Pinned Thumbtacks</td>
+                    <td>Sort the array. Pin pointer 'i'. Pin pointer 'j' just ahead of 'i'. Then use the L and R pointers to squeeze the remaining array. Skip duplicates at all levels!</td>
+                    <td>Draw a sorted array. Stick a red thumbtack on 'i' and a blue one on 'j'. Bracket the rest. Put L at j+1, R at the end. Move L/R to hit the target.</td>
+                    <td>N² * (Squeezing Line)</td>
+                    <td>Draw two nested outer loops for the anchors (O(N²)). Inside, draw a straight line for the L/R squeeze (O(N)). Total time is reduced to O(N³).</td>
+                    <td>Generates massive duplicate sets requiring expensive hash sets for deduplication.</td>
+                    <td>Draw four pointer variables (i, j, L, R) scanning in place. Space complexity is mostly O(1) or O(N) depending on the sorting step.</td>
+                </tr>
+
+                <tr>
+                    <td>19</td>
+                    <td><b>Remove Nth Node From End of List</b></td>
+                    <td><span class="badge-bf">Two Passes</span> Traverse the entire linked list to find its length L. Do a second traversal to stop at node (L - N) and remove the next node.</td>
+                    <td>Double Finish Line</td>
+                    <td>Draw a linked list. Draw an arrow running all the way to the end (Pass 1). Draw a second arrow stopping just before the target (Pass 2).</td>
+                    <td><span class="badge-opt">Fast & Slow Pointers (One Pass)</span></td>
+                    <td>The Fixed-Gap Runners</td>
+                    <td>Send a 'Fast' pointer exactly N steps ahead. Then, move both 'Fast' and 'Slow' at the same speed. When 'Fast' hits the end, 'Slow' is right before the target node.</td>
+                    <td>Draw a linked list. Place 'Fast' 2 nodes ahead of 'Slow'. Draw a rigid stick connecting them. Slide both right until 'Fast' falls off the end. 'Slow' bypasses the next node.</td>
+                    <td>Single Segmented Line</td>
+                    <td>Draw a line of length L. Show the Fast pointer covering it in one go. Time is strictly O(L) with only one traversal.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw exactly two pointer variables (Fast, Slow). No new nodes or data structures are created (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>20</td>
+                    <td><b>Valid Parentheses</b></td>
+                    <td><span class="badge-bf">String Replacement</span> Repeatedly search for "()", "{}", and "[]" and replace them with empty strings. If the string becomes empty, it's valid.</td>
+                    <td>The Eraser</td>
+                    <td>Draw the string `"{[()]}"`. Erase the middle `()`. Then erase the `[]`. Then erase the `{}`. Emphasize that string shifting makes this O(N²).</td>
+                    <td><span class="badge-opt">Stack (LIFO)</span></td>
+                    <td>The Spring-Loaded Tube</td>
+                    <td>Read left to right. If it's an open bracket, push it into the tube. If it's a closed bracket, check if it matches the top of the tube. If yes, pop it. If no, invalid.</td>
+                    <td>Draw a vertical bucket. Push `(`, `[`, `{` down into it. When `}` arrives, check the top of the bucket. Since it's `{`, cross them both out.</td>
+                    <td>Single Pass + O(1) Ops</td>
+                    <td>Draw a single straight arrow reading the string (O(N)). Next to it, draw a tiny push/pop box to show stack operations take O(1). Total time O(N).</td>
+                    <td>Draw multiple intermediate string copies being created during the replacement process.</td>
+                    <td>Draw a vertical Stack data structure. In the worst case (all open brackets), it grows to size O(N).</td>
+                </tr>
