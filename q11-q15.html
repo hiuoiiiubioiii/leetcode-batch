@@ -1,0 +1,79 @@
+<tr>
+                    <td>11</td>
+                    <td><b>Container With Most Water</b></td>
+                    <td><span class="badge-bf">All Pairs (Nested Loops)</span> Check every possible pair of left and right lines to calculate the area.</td>
+                    <td>2D Matrix of Combinations</td>
+                    <td>Draw the array of heights. Point 'i' at the first line, and let 'j' iterate through all lines to its right. Tally N+(N-1)+... to show O(N²).</td>
+                    <td><span class="badge-opt">Two Pointers (Greedy Squeeze)</span></td>
+                    <td>Collapsing Walls</td>
+                    <td>Place pointers at the extreme ends. The width is maximized, so to find a bigger area, we MUST find a taller line. Always move the shorter line inward.</td>
+                    <td>Draw the array. Place an 'L' arrow at index 0 and 'R' at N-1. Draw a water block between them. Cross out the shorter line and draw its arrow stepping inward.</td>
+                    <td>Squeezing Timeline</td>
+                    <td>Draw a horizontal line of length N. Draw arrows from both ends moving strictly inward until they collide. Exactly N steps = O(N) time.</td>
+                    <td>Draw a maxArea variable. O(1) space.</td>
+                    <td>Draw three variables: L, R, and maxArea. Emphasize that no new arrays are built (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>12</td>
+                    <td><b>Integer to Roman</b></td>
+                    <td><span class="badge-bf">Massive If/Else Chains</span> Hardcode conditions for every specific range (if > 1000, else if > 900...).</td>
+                    <td>Tangled Flowchart</td>
+                    <td>Draw a giant, messy decision tree checking value ranges, visually representing ugly and hard-to-maintain code.</td>
+                    <td><span class="badge-opt">Greedy Subtraction (Coin Change)</span></td>
+                    <td>The Greedy Cashier</td>
+                    <td>Treat Roman symbols as coin denominations (1000, 900, 500...). Always hand back the largest "coin" possible until the number hits 0.</td>
+                    <td>Draw two parallel lists: Values [1000, 900, 500...] and Symbols [M, CM, D...]. Point at the largest value <= num. Subtract value, append symbol.</td>
+                    <td>Fixed-Length Steps</td>
+                    <td>Draw a loop executing at most 13 times (the number of specific Roman numeral symbols/combos). Constant time loop = O(1) time complexity.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw two fixed-size arrays (size 13) acting as lookup tables. Because their size never changes regardless of input, space is O(1).</td>
+                </tr>
+
+                <tr>
+                    <td>13</td>
+                    <td><b>Roman to Integer</b></td>
+                    <td><span class="badge-bf">Scan with Lookahead</span> Scan left to right, using complex conditionals to check if the next character forms a special pair (like IV or IX).</td>
+                    <td>Clunky Peeking Pointers</td>
+                    <td>Draw a pointer at 'i'. Draw a secondary, dashed pointer peeking at 'i+1' with a question mark, representing the clunky edge-case checks.</td>
+                    <td><span class="badge-opt">Compare Current vs Next</span></td>
+                    <td>"Smaller Before Larger" Rule</td>
+                    <td>Read left to right. If the current numeral's value is LESS than the next numeral's value, subtract it. Otherwise, add it.</td>
+                    <td>Write "MCMXCIV". Write the integer values below each letter. Draw an arrow from C(100) to M(1000). Since 100 < 1000, write a minus sign.</td>
+                    <td>Single Scan Line</td>
+                    <td>Draw a single straight arrow from left to right across the string. We look at each character exactly once. O(N) time.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw a fixed Hash Map containing exactly 7 key-value pairs mapping Roman letters to integers (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>14</td>
+                    <td><b>Longest Common Prefix</b></td>
+                    <td><span class="badge-bf">Vertical Character Matching</span> Check index 0 of all strings, then index 1 of all strings, until a mismatch occurs.</td>
+                    <td>Vertical Scanner</td>
+                    <td>Stack the strings vertically. Draw a tall, narrow box highlighting column 0, then column 1. Stop and draw an X when letters don't match.</td>
+                    <td><span class="badge-opt">Horizontal Shrinking</span></td>
+                    <td>The Chopping Block</td>
+                    <td>Assume the first string is the prefix. Compare it to the next string. If it doesn't match, chop the last letter off the prefix and try again.</td>
+                    <td>Draw a `prefix` box initially holding String[0]. Draw scissors chopping off the rightmost letter of the `prefix` box until `String[i].startsWith(prefix)` is true.</td>
+                    <td>Total Character Count Line</td>
+                    <td>Draw a line representing S (total number of characters in all strings combined). In the worst case, every character is checked once. O(S) time.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw a single string variable shrinking in place. No massive arrays are allocated (O(1) auxiliary space).</td>
+                </tr>
+
+                <tr>
+                    <td>15</td>
+                    <td><b>3Sum</b></td>
+                    <td><span class="badge-bf">Generate All Triplets</span> Use three nested loops to check every possible combination of three numbers.</td>
+                    <td>3D Cube of Combinations</td>
+                    <td>Draw three nested rotating gears (i, j, k). Write out the formula N * (N-1) * (N-2) to explicitly show the disastrous O(N³) complexity.</td>
+                    <td><span class="badge-opt">Sort + Anchor & Squeeze</span></td>
+                    <td>The Pinned Thumbtack</td>
+                    <td>Sort the array. Pin pointer 'i' (the anchor). Use standard 2Sum II (L and R pointers squeezing inward) on the remaining right side of the array. Skip duplicates!</td>
+                    <td>Draw a sorted array. Stick a thumbtack on 'i'. Bracket the rest of the array. Put 'L' at the start of the bracket, 'R' at the end. Move L/R based on the sum.</td>
+                    <td>N * (Squeezing Line)</td>
+                    <td>Draw an O(N log N) box for sorting. Below it, draw an outer loop (N times). Inside it, draw a straight line representing the O(N) L/R squeeze. Total = O(N²).</td>
+                    <td>Generates massive duplicate sets in memory requiring expensive deduplication.</td>
+                    <td>Draw just three pointer variables (i, L, R) scanning the array in place. Space complexity is O(1) or O(N) depending purely on the sorting algorithm used.</td>
+                </tr>
