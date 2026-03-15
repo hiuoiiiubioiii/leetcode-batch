@@ -1,0 +1,79 @@
+<tr>
+                    <td>21</td>
+                    <td><b>Merge Two Sorted Lists</b></td>
+                    <td><span class="badge-bf">Array Extraction & Sort</span> Traverse both lists, put all values into an array, sort the array O(N log N), and build a brand new linked list.</td>
+                    <td>The Sorting Funnel</td>
+                    <td>Draw two linked lists dumping their nodes into an unsorted bucket. Draw a sorting machine that spits out a clean, new list. Emphasize the wasted O(N log N) time.</td>
+                    <td><span class="badge-opt">Two Pointers + Dummy Node</span></td>
+                    <td>The Zipper</td>
+                    <td>Create a `dummy` node. Place pointer P1 on List 1 and P2 on List 2. Compare P1 and P2. Attach the smaller node to the `dummy` tail, then advance that pointer.</td>
+                    <td>Draw List 1 and List 2. Draw a star (Dummy) with an arrow `current`. Point `current` to the smaller of P1/P2. Cross out the old pointer and move it forward.</td>
+                    <td>Parallel Tracks</td>
+                    <td>Draw two parallel lines of length M and N. Draw a zipper merging them perfectly in one pass. Time is strictly O(M + N).</td>
+                    <td>Draw a completely new array of size M+N (O(M+N) space).</td>
+                    <td>Draw only a few pointer variables (Dummy, Current, P1, P2) weaving existing nodes together (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>22</td>
+                    <td><b>Generate Parentheses</b></td>
+                    <td><span class="badge-bf">Generate All & Validate</span> Create every possible string of '(' and ')' of length 2N (which is 2^(2N) strings), then check if each string is valid.</td>
+                    <td>Massive Explosion Tree</td>
+                    <td>Draw a giant binary tree of height 2N where every node splits into '(' and ')'. At the bottom, draw a slow scanner checking every single leaf node for validity.</td>
+                    <td><span class="badge-opt">Backtracking (Constrained DFS)</span></td>
+                    <td>The Guarded Gates</td>
+                    <td>Build the string recursively. You can only add '(' if `open < N`. You can only add ')' if `close < open`. If length is 2N, record the string.</td>
+                    <td>Draw a root node. Branch left for '(' and right for ')'. Put a lock icon on the right branch if `open == close` (meaning you can't add a closing bracket yet).</td>
+                    <td>Pruned Tree Counter</td>
+                    <td>Draw a tree but physically cross out entire branches early on. The time complexity is bounded by the Nth Catalan number, roughly O(4^N / sqrt(N)).</td>
+                    <td>Draw 2^(2N) strings taking up enormous memory space.</td>
+                    <td>Draw the recursion stack (max depth 2N) and a single string builder modifying in place. Space is O(N).</td>
+                </tr>
+
+                <tr>
+                    <td>23</td>
+                    <td><b>Merge k Sorted Lists</b></td>
+                    <td><span class="badge-bf">Extract All & Sort</span> Dump every single node from all K lists into one massive array, sort it, and recreate the list.</td>
+                    <td>The Giant Blender</td>
+                    <td>Draw K separate lists pouring into one massive array. Write O(N log N) where N is the TOTAL number of nodes across all lists.</td>
+                    <td><span class="badge-opt">Min-Heap (Priority Queue)</span></td>
+                    <td>The Vending Machine</td>
+                    <td>Put the head node of all K lists into a Min-Heap. Pop the smallest node, attach it to the result, and push that node's `next` into the heap.</td>
+                    <td>Draw a funnel (Heap) holding K items. Drop the smallest item out the bottom. Immediately replace it with the next item from the list it came from.</td>
+                    <td>Logarithmic Extraction</td>
+                    <td>Draw an N-length timeline. At each step, draw a small O(log K) box representing the heap push/pop operation. Total Time: O(N log K).</td>
+                    <td>Draw a massive array of size N (Total nodes). O(N) space.</td>
+                    <td>Draw a fixed-size Triangle (Min-Heap) that never holds more than K elements. Space is O(K) for the heap.</td>
+                </tr>
+
+                <tr>
+                    <td>24</td>
+                    <td><b>Swap Nodes in Pairs</b></td>
+                    <td><span class="badge-bf">Value Swapping</span> Traverse the list and simply swap the integer values inside the nodes (e.g., node.val = next.val).</td>
+                    <td>The Shell Game</td>
+                    <td>Draw nodes. Physically erase the numbers inside the boxes and swap them. Note that this is generally considered a bad practice in interview settings.</td>
+                    <td><span class="badge-opt">Pointer Manipulation + Dummy Node</span></td>
+                    <td>The Leapfrog</td>
+                    <td>Use a dummy node pointing to the head. Grab a pair of nodes (A and B). Make Dummy point to B, B point to A, and A point to whatever comes after B.</td>
+                    <td>Draw `prev -> A -> B -> next`. Draw curved arrows overriding the straight ones: `prev` arcs to `B`, `B` arcs backward to `A`, `A` arcs to `next`.</td>
+                    <td>Segmented Line</td>
+                    <td>Draw a line. Chop it into segments of 2. Draw a quick rotation arrow over each segment. We touch every node exactly once. O(N) time.</td>
+                    <td>O(1) space, but alters data instead of structure.</td>
+                    <td>Draw three pointers (`prev`, `curr`, `next_pair`). We only manipulate existing links in memory, so space is strictly O(1).</td>
+                </tr>
+
+                <tr>
+                    <td>25</td>
+                    <td><b>Reverse Nodes in k-Group</b></td>
+                    <td><span class="badge-bf">Array Extraction</span> Extract K values into an array, reverse the array, put the values back into the nodes, repeat.</td>
+                    <td>The Data Shuffler</td>
+                    <td>Draw an array of size K below the linked list. Draw arrows pulling values down, shuffling them, and pushing them back up into the nodes.</td>
+                    <td><span class="badge-opt">In-Place Pointer Reversal</span></td>
+                    <td>The Segment Flipper</td>
+                    <td>Find the Kth node. If it exists, sever the connection, reverse the sub-list of size K using standard list reversal, then reconnect the edges.</td>
+                    <td>Draw a list. Put a bracket around K nodes. Reverse the arrows inside the bracket. Draw the `prevGroupTail` pointing to the new head of this bracket.</td>
+                    <td>Chunked Timeline</td>
+                    <td>Draw a timeline. Divide it into blocks of K. Process each block linearly. Total time is exactly O(N).</td>
+                    <td>Draw an array of size K allocating and deallocating in memory continuously. Space is O(K).</td>
+                    <td>Draw standard reversal pointers (`prev`, `curr`, `next`). Since we just flip existing arrows in memory, it is perfectly O(1) space.</td>
+                </tr>
