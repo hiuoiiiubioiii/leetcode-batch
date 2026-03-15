@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leetcode Visual Study Guide - Batch 1</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 20px; }
+        h1 { color: #2c3e50; }
+        .table-wrapper { overflow-x: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        table { border-collapse: collapse; width: 100%; min-width: 1800px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: top; }
+        th { background-color: #2980b9; color: white; position: sticky; top: 0; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        .badge-bf { background-color: #e74c3c; color: white; padding: 3px 6px; border-radius: 4px; font-size: 12px; }
+        .badge-opt { background-color: #27ae60; color: white; padding: 3px 6px; border-radius: 4px; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <h1>Leetcode Visual Study Guide: Questions 1 - 5</h1>
+    
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Q#</th>
+                    <th>Problem Title</th>
+                    <th>Brute Force Method</th>
+                    <th>BF Complexity Vis.</th>
+                    <th>How to Draw BF Complexity</th>
+                    <th>Optimised Core Pattern</th>
+                    <th>Opt Visualization Technique</th>
+                    <th>How to Visually Dry Run (Opt)</th>
+                    <th>How to Draw (Opt)</th>
+                    <th>Opt Complexity Vis.</th>
+                    <th>How to Draw Opt Complexity</th>
+                    <th>Mem Vis (Brute Force)</th>
+                    <th>Mem Vis (Optimised)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><b>Two Sum</b></td>
+                    <td><span class="badge-bf">Nested Loops</span> Check every pair of numbers to see if they sum to target.</td>
+                    <td>2D Matrix of Combinations</td>
+                    <td>Draw an array. Draw an 'i' arrow pointing to index 0, and a 'j' arrow hopping from i+1 to the end. Tally the hops as N+(N-1)+(N-2)... to show O(N²).</td>
+                    <td><span class="badge-opt">Hash Map (One Pass)</span></td>
+                    <td>"Bucket Lookup" Diagram</td>
+                    <td>Visualize numbers dropping into a bucket one by one. As a number drops, ask the bucket: "Do you contain (Target - Current)?"</td>
+                    <td>Draw the array on the left and a 2-column table (Key=Num, Value=Index) on the right. Draw a line from the current array element to the table looking for its complement.</td>
+                    <td>Flat Line + Branching Node</td>
+                    <td>Draw a single straight arrow (O(N) traversal). Draw a tiny box off each step representing the O(1) map lookup. Total = O(N).</td>
+                    <td>Just the 1D input array block (O(1) extra space).</td>
+                    <td>Draw a growing rectangular grid representing the Hash Map taking up O(N) space as the loop progresses.</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td><b>Add Two Numbers</b></td>
+                    <td><span class="badge-bf">List to Int</span> Traverse both lists, convert to integers, add them, convert back to list (Fails for huge numbers).</td>
+                    <td>Data Type Pipeline</td>
+                    <td>Draw two chains of nodes. Draw a funnel combining them into a massive integer variable, then an arrow pushing that integer out into a new chain.</td>
+                    <td><span class="badge-opt">Digit-by-Digit Math w/ Carry</span></td>
+                    <td>Vertical Addition with Carry Over</td>
+                    <td>Stack the linked lists vertically like primary school addition. Add top node + bottom node + carry, output modulo 10 to a new node, pass carry to next column.</td>
+                    <td>Draw L1 on top, L2 below it. Draw vertical boxes circling the nodes at index 'i'. Write a "+ Carry" bubble at the top of the next column.</td>
+                    <td>Parallel Traversal Lines</td>
+                    <td>Draw two parallel lines of length max(M,N). The complexity is strictly bounded by the longer line. O(max(M,N)).</td>
+                    <td>Draw giant variables (Strings/BigInts) holding the intermediate numbers.</td>
+                    <td>Draw a new chain of nodes (O(max(M,N)) length) mapping 1:1 with the longest input list plus one potential carry node.</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td><b>Longest Substring Without Repeating Characters</b></td>
+                    <td><span class="badge-bf">Generate All Substrings</span> 3 Nested loops to generate and check validity of all substrings.</td>
+                    <td>Expanding Triangle</td>
+                    <td>Draw a line. Below it, draw shorter and shorter lines representing every possible substring. Count them to show O(N³) operations.</td>
+                    <td><span class="badge-opt">Sliding Window (Hash Set)</span></td>
+                    <td>Caterpillar/Accordion</td>
+                    <td>Visualize a flexible box covering the string. The right edge stretches right to engulf unique letters. If a duplicate is hit, the left edge pulls in until the duplicate is evicted.</td>
+                    <td>Draw the string. Draw a bracket `[` for the left pointer and `]` for the right. Erase and redraw `]` moving right. Erase and redraw `[` moving right when a collision occurs.</td>
+                    <td>Two Chasing Pointers</td>
+                    <td>Draw a timeline. Show pointer R traversing 0 to N. Show pointer L traversing 0 to N. Emphasize that L and R only move *forward*, proving 2N steps = O(N).</td>
+                    <td>Draw numerous separate arrays/strings taking up massive heap space if generating actual strings.</td>
+                    <td>Draw a fixed-size HashSet (max 26 for letters, or 128 for ASCII). Shade in boxes as characters enter the window, unshade as they leave.</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td><b>Median of Two Sorted Arrays</b></td>
+                    <td><span class="badge-bf">Merge & Find Middle</span> Merge both arrays into a new sorted array and pick the middle index.</td>
+                    <td>Two Funnels into One</td>
+                    <td>Draw Array A and Array B. Draw arrows from both pointing into a new, larger Array C. Count the sizes to show O(M+N).</td>
+                    <td><span class="badge-opt">Binary Search on Partitions</span></td>
+                    <td>Balanced See-Saw</td>
+                    <td>Visualize a vertical line cutting through both arrays. The goal is to move the cut left/right until the max on the left side is <= the min on the right side.</td>
+                    <td>Draw Array A on top of Array B. Draw a red vertical partition line through both. Write the boundary conditions (L1 <= R2 and L2 <= R1) explicitly next to the line.</td>
+                    <td>Halving Block</td>
+                    <td>Draw the smaller array. Draw a box around it, then cross out half the box, then cross out half of the remaining half. Write O(log(min(M,N))).</td>
+                    <td>Draw a massive new array block equal to the size of A + B (O(M+N) space).</td>
+                    <td>Draw just the two original arrays. Place a few pointer arrows (L, R, mid). Emphasize no new array is drawn (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td><b>Longest Palindromic Substring</b></td>
+                    <td><span class="badge-bf">Check All Substrings</span> Generate O(N²) substrings and spend O(N) checking if each is a palindrome.</td>
+                    <td>Brute Force Grid + Scanner</td>
+                    <td>Draw the string. Bracket every possible substring. Draw a bidirectional scanner line moving outside-in for each bracketed section to show O(N³).</td>
+                    <td><span class="badge-opt">Expand Around Center</span></td>
+                    <td>Water Ripples</td>
+                    <td>Pick a letter (or space between letters) and drop a "pebble". Watch the pointers ripple outward in both directions as long as the letters match.</td>
+                    <td>Draw the string. Place an "X" on one character. Draw outward-facing arrows `<--` and `-->` originating from the "X" moving step-by-step.</td>
+                    <td>N Centers * N Expansions</td>
+                    <td>Draw N dots (centers). Draw expanding circles around each dot. Maximum circle size is N. N centers * N max expansion = O(N²).</td>
+                    <td>Draw hundreds of separate string blocks allocated in memory for each substring check.</td>
+                    <td>Draw the single original string, and track memory using just two integer variables (Start Index, Max Length) to show O(1) space.</td>
+                </tr>
+                
+                <tr>
+                    <td>6</td>
+                    <td><b>Zigzag Conversion</b></td>
+                    <td><span class="badge-bf">2D Matrix Simulation</span> Create a massive 2D matrix, physically place characters moving down and diagonally up, then read row by row.</td>
+                    <td>Sparse Grid Traversal</td>
+                    <td>Draw a large grid. Write the word moving down, then diagonally up. Cross out the massive amount of empty space to visualize the wasted O(numRows * N) memory and time.</td>
+                    <td><span class="badge-opt">Math / Index Hopping</span></td>
+                    <td>Jumping Frogs (Cycle Length)</td>
+                    <td>Formula: cycle = 2 * numRows - 2. Jump forward by 'cycle' to find the next character for the top/bottom rows. Middle rows have a second inner jump.</td>
+                    <td>Write the string out linearly. Draw long arcs jumping over characters for the top row. Draw secondary, shorter alternating arcs for the middle rows.</td>
+                    <td>Single Linear Pass</td>
+                    <td>Draw a single straight arrow across the original string. No matrix traversal needed, making it mathematically O(N).</td>
+                    <td>Draw a massive 2D grid taking up lots of screen space (O(numRows * N) space).</td>
+                    <td>Draw a single array of strings (one string builder per row) combined at the end (O(N) space).</td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td><b>Reverse Integer</b></td>
+                    <td><span class="badge-bf">String Conversion</span> Convert integer to string, reverse the string characters, handle the minus sign, parse back to integer.</td>
+                    <td>String Pipeline</td>
+                    <td>Draw a box with a number, an arrow to an array of characters, reverse the arrows pointing to a new array, and an arrow parsing it back.</td>
+                    <td><span class="badge-opt">Digit Extraction (Pop & Push)</span></td>
+                    <td>Modulo Machine</td>
+                    <td>Pop the last digit using `% 10`. Push it onto the new number by multiplying the new number by 10 and adding the popped digit. Divide original by 10.</td>
+                    <td>Draw two boxes: `X` and `Rev`. Draw a loop where the rightmost digit of `X` falls off, slides over, and attaches to the right side of `Rev`.</td>
+                    <td>Shrinking Digit Bar</td>
+                    <td>Draw a bar representing the number's length. Erase one segment per step. Time complexity is O(log10(x)) — proportional to the number of digits.</td>
+                    <td>Draw an array of characters allocated in memory (O(log10(x)) space).</td>
+                    <td>Draw exactly two integer variables (`X` and `Rev`) updating in place (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td><b>String to Integer (atoi)</b></td>
+                    <td><span class="badge-bf">Regex / Multi-pass Filter</span> Run multiple passes: strip whitespace, extract sign, extract valid digits into a new string, then parse.</td>
+                    <td>Conveyor Belt Filters</td>
+                    <td>Draw a string on a conveyor belt passing through three separate machines (Space Remover -> Sign Checker -> Number Extractor).</td>
+                    <td><span class="badge-opt">Deterministic One-Pass (DFA)</span></td>
+                    <td>State Machine</td>
+                    <td>Read left to right. Maintain a "state" (1. Skipping spaces, 2. Reading sign, 3. Reading digits). Once in state 3, any non-digit stops the machine.</td>
+                    <td>Draw a timeline. Place a pointer moving left to right. Draw bubbles above it representing the current state transitioning: [Start] -> [Sign] -> [Digit Accumulation] -> [Done].</td>
+                    <td>Single Scan Line</td>
+                    <td>Draw a single straight arrow from index 0 to N. Emphasize that we never step backward. O(N) time.</td>
+                    <td>Draw intermediate string arrays being created for every filtering step (O(N) space).</td>
+                    <td>Draw a single integer accumulator and a few boolean flags (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>9</td>
+                    <td><b>Palindrome Number</b></td>
+                    <td><span class="badge-bf">String Reversal</span> Convert the number to a string and use two pointers (Left and Right) moving inward to check for a match.</td>
+                    <td>Inward Pointers</td>
+                    <td>Draw an array of characters. Draw L arrow at index 0, R arrow at the end. Move them inward. Requires extra O(n) space for string conversion.</td>
+                    <td><span class="badge-opt">Revert Half the Number</span></td>
+                    <td>Paper Fold</td>
+                    <td>Extract the back half of the number digit by digit (like Q7) and build a `reversedHalf`. Stop when `originalNumber <= reversedHalf`.</td>
+                    <td>Draw a large number. Draw a scissor line in the middle. Show the right half flipping over and comparing itself to the left half.</td>
+                    <td>Half-Length Timeline</td>
+                    <td>Draw an arrow representing the digits, but stop the arrow exactly in the middle. Time complexity is O(log10(n) / 2).</td>
+                    <td>Draw a string array taking up memory proportional to the number of digits.</td>
+                    <td>Draw two integer variables (Original, ReversedHalf) (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>10</td>
+                    <td><b>Regular Expression Matching</b></td>
+                    <td><span class="badge-bf">Pure Recursion</span> For every '*' character, branch into two paths: one where '*' matches zero characters, one where it matches one or more.</td>
+                    <td>Exploding Decision Tree</td>
+                    <td>Draw a root node. Draw two branches coming down. Draw two more from each of those. Keep splitting until it forms a massive tree. O(2^N) time.</td>
+                    <td><span class="badge-opt">Dynamic Programming (2D Table)</span></td>
+                    <td>Grid Filling</td>
+                    <td>Create a 2D matrix where dp[i][j] answers "does s[0..i] match p[0..j]?". Fill top-to-bottom, left-to-right based on previous cell answers.</td>
+                    <td>Draw a grid. String `s` on the left (Y axis), pattern `p` on top (X axis). Draw arrows showing that the current cell's True/False value is pulled from the cell above, left, or top-left.</td>
+                    <td>Matrix Area</td>
+                    <td>Draw a rectangle representing M x N dimensions. Shade it in row by row to show strict O(M * N) time boundaries (no exponential explosion).</td>
+                    <td>Draw a massive stack of recursive function calls eating up memory.</td>
+                    <td>Draw a fixed M x N grid representing the DP table (O(M * N) space).</td>
+                </tr>
+
+                <tr>
+                    <td>11</td>
+                    <td><b>Container With Most Water</b></td>
+                    <td><span class="badge-bf">All Pairs (Nested Loops)</span> Check every possible pair of left and right lines to calculate the area.</td>
+                    <td>2D Matrix of Combinations</td>
+                    <td>Draw the array of heights. Point 'i' at the first line, and let 'j' iterate through all lines to its right. Tally N+(N-1)+... to show O(N²).</td>
+                    <td><span class="badge-opt">Two Pointers (Greedy Squeeze)</span></td>
+                    <td>Collapsing Walls</td>
+                    <td>Place pointers at the extreme ends. The width is maximized, so to find a bigger area, we MUST find a taller line. Always move the shorter line inward.</td>
+                    <td>Draw the array. Place an 'L' arrow at index 0 and 'R' at N-1. Draw a water block between them. Cross out the shorter line and draw its arrow stepping inward.</td>
+                    <td>Squeezing Timeline</td>
+                    <td>Draw a horizontal line of length N. Draw arrows from both ends moving strictly inward until they collide. Exactly N steps = O(N) time.</td>
+                    <td>Draw a maxArea variable. O(1) space.</td>
+                    <td>Draw three variables: L, R, and maxArea. Emphasize that no new arrays are built (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>12</td>
+                    <td><b>Integer to Roman</b></td>
+                    <td><span class="badge-bf">Massive If/Else Chains</span> Hardcode conditions for every specific range (if > 1000, else if > 900...).</td>
+                    <td>Tangled Flowchart</td>
+                    <td>Draw a giant, messy decision tree checking value ranges, visually representing ugly and hard-to-maintain code.</td>
+                    <td><span class="badge-opt">Greedy Subtraction (Coin Change)</span></td>
+                    <td>The Greedy Cashier</td>
+                    <td>Treat Roman symbols as coin denominations (1000, 900, 500...). Always hand back the largest "coin" possible until the number hits 0.</td>
+                    <td>Draw two parallel lists: Values [1000, 900, 500...] and Symbols [M, CM, D...]. Point at the largest value <= num. Subtract value, append symbol.</td>
+                    <td>Fixed-Length Steps</td>
+                    <td>Draw a loop executing at most 13 times (the number of specific Roman numeral symbols/combos). Constant time loop = O(1) time complexity.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw two fixed-size arrays (size 13) acting as lookup tables. Because their size never changes regardless of input, space is O(1).</td>
+                </tr>
+
+                <tr>
+                    <td>13</td>
+                    <td><b>Roman to Integer</b></td>
+                    <td><span class="badge-bf">Scan with Lookahead</span> Scan left to right, using complex conditionals to check if the next character forms a special pair (like IV or IX).</td>
+                    <td>Clunky Peeking Pointers</td>
+                    <td>Draw a pointer at 'i'. Draw a secondary, dashed pointer peeking at 'i+1' with a question mark, representing the clunky edge-case checks.</td>
+                    <td><span class="badge-opt">Compare Current vs Next</span></td>
+                    <td>"Smaller Before Larger" Rule</td>
+                    <td>Read left to right. If the current numeral's value is LESS than the next numeral's value, subtract it. Otherwise, add it.</td>
+                    <td>Write "MCMXCIV". Write the integer values below each letter. Draw an arrow from C(100) to M(1000). Since 100 < 1000, write a minus sign.</td>
+                    <td>Single Scan Line</td>
+                    <td>Draw a single straight arrow from left to right across the string. We look at each character exactly once. O(N) time.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw a fixed Hash Map containing exactly 7 key-value pairs mapping Roman letters to integers (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>14</td>
+                    <td><b>Longest Common Prefix</b></td>
+                    <td><span class="badge-bf">Vertical Character Matching</span> Check index 0 of all strings, then index 1 of all strings, until a mismatch occurs.</td>
+                    <td>Vertical Scanner</td>
+                    <td>Stack the strings vertically. Draw a tall, narrow box highlighting column 0, then column 1. Stop and draw an X when letters don't match.</td>
+                    <td><span class="badge-opt">Horizontal Shrinking</span></td>
+                    <td>The Chopping Block</td>
+                    <td>Assume the first string is the prefix. Compare it to the next string. If it doesn't match, chop the last letter off the prefix and try again.</td>
+                    <td>Draw a `prefix` box initially holding String[0]. Draw scissors chopping off the rightmost letter of the `prefix` box until `String[i].startsWith(prefix)` is true.</td>
+                    <td>Total Character Count Line</td>
+                    <td>Draw a line representing S (total number of characters in all strings combined). In the worst case, every character is checked once. O(S) time.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw a single string variable shrinking in place. No massive arrays are allocated (O(1) auxiliary space).</td>
+                </tr>
+
+                <tr>
+                    <td>15</td>
+                    <td><b>3Sum</b></td>
+                    <td><span class="badge-bf">Generate All Triplets</span> Use three nested loops to check every possible combination of three numbers.</td>
+                    <td>3D Cube of Combinations</td>
+                    <td>Draw three nested rotating gears (i, j, k). Write out the formula N * (N-1) * (N-2) to explicitly show the disastrous O(N³) complexity.</td>
+                    <td><span class="badge-opt">Sort + Anchor & Squeeze</span></td>
+                    <td>The Pinned Thumbtack</td>
+                    <td>Sort the array. Pin pointer 'i' (the anchor). Use standard 2Sum II (L and R pointers squeezing inward) on the remaining right side of the array. Skip duplicates!</td>
+                    <td>Draw a sorted array. Stick a thumbtack on 'i'. Bracket the rest of the array. Put 'L' at the start of the bracket, 'R' at the end. Move L/R based on the sum.</td>
+                    <td>N * (Squeezing Line)</td>
+                    <td>Draw an O(N log N) box for sorting. Below it, draw an outer loop (N times). Inside it, draw a straight line representing the O(N) L/R squeeze. Total = O(N²).</td>
+                    <td>Generates massive duplicate sets in memory requiring expensive deduplication.</td>
+                    <td>Draw just three pointer variables (i, L, R) scanning the array in place. Space complexity is O(1) or O(N) depending purely on the sorting algorithm used.</td>
+                </tr>
+
+                <tr>
+                    <td>16</td>
+                    <td><b>3Sum Closest</b></td>
+                    <td><span class="badge-bf">Generate All Triplets</span> Use three nested loops to find all sums and track the one with the minimum absolute difference to the target.</td>
+                    <td>3D Cube + Min Tracker</td>
+                    <td>Draw three nested rotating gears. Draw a side box holding `closest_sum`. Update it every time a new gear combo produces a smaller `abs(target - sum)`.</td>
+                    <td><span class="badge-opt">Sort + Anchor & Squeeze</span></td>
+                    <td>The Magnetic Pointers</td>
+                    <td>Sort the array. Pin pointer 'i'. Move L and R inward just like 3Sum, but instead of looking for exactly 0, you move L right if sum < target, and R left if sum > target.</td>
+                    <td>Draw a sorted array. Pin 'i'. Place L and R. Write the `target`. Draw arrows pulling L or R inward trying to get the sum magnetically closer to the target value.</td>
+                    <td>N * (Squeezing Line)</td>
+                    <td>Draw an outer loop representing 'i' (O(N)). Inside, draw a straight line for the L/R squeeze (O(N)). Total time is O(N²).</td>
+                    <td>O(1) space, but O(N³) time makes it unusable.</td>
+                    <td>Draw a single `closest_sum` integer variable. Space is O(1) or O(N) depending purely on the sorting algorithm.</td>
+                </tr>
+
+                <tr>
+                    <td>17</td>
+                    <td><b>Letter Combinations of a Phone Number</b></td>
+                    <td><span class="badge-bf">Iterative Cross-Product</span> Create an array of strings. For every new digit, multiply the existing array size by 3 or 4 and append the new letters.</td>
+                    <td>Exploding Array</td>
+                    <td>Draw a small array `["a", "b", "c"]`. Draw an arrow to a massive new array where every element is copied 3 times to append the next letters. O(4^N) space chaos.</td>
+                    <td><span class="badge-opt">Backtracking (DFS)</span></td>
+                    <td>Decision Tree (Depth-First)</td>
+                    <td>Build combinations character by character. Go as deep as possible (length of input digits), record the word, then backtrack one step and try the next letter.</td>
+                    <td>Draw a root node. Branch out to 'a', 'b', 'c'. From 'a', branch to 'd', 'e', 'f'. Trace a line down to "ad", then back up to 'a', then down to "ae".</td>
+                    <td>Tree Leaf Counter</td>
+                    <td>Draw a tree with a branching factor of 4 (worst case for digits 7 and 9). Draw the depth as N. Note that you visit 4^N leaves. Time is O(4^N * N).</td>
+                    <td>Draw giant intermediate arrays taking up huge chunks of memory during the iterative build.</td>
+                    <td>Draw a single string builder (or character array) growing and shrinking. Also draw the recursion stack (depth N). Total space is O(N).</td>
+                </tr>
+
+                <tr>
+                    <td>18</td>
+                    <td><b>4Sum</b></td>
+                    <td><span class="badge-bf">Generate All Quadruplets</span> Four nested loops scanning every combination of four numbers.</td>
+                    <td>4D Hypercube</td>
+                    <td>Write out four nested loops (i, j, k, l). Note the complexity as N * (N-1) * (N-2) * (N-3). A massive O(N⁴) time block.</td>
+                    <td><span class="badge-opt">Sort + Two Anchors + Squeeze</span></td>
+                    <td>Dual Pinned Thumbtacks</td>
+                    <td>Sort the array. Pin pointer 'i'. Pin pointer 'j' just ahead of 'i'. Then use the L and R pointers to squeeze the remaining array. Skip duplicates at all levels!</td>
+                    <td>Draw a sorted array. Stick a red thumbtack on 'i' and a blue one on 'j'. Bracket the rest. Put L at j+1, R at the end. Move L/R to hit the target.</td>
+                    <td>N² * (Squeezing Line)</td>
+                    <td>Draw two nested outer loops for the anchors (O(N²)). Inside, draw a straight line for the L/R squeeze (O(N)). Total time is reduced to O(N³).</td>
+                    <td>Generates massive duplicate sets requiring expensive hash sets for deduplication.</td>
+                    <td>Draw four pointer variables (i, j, L, R) scanning in place. Space complexity is mostly O(1) or O(N) depending on the sorting step.</td>
+                </tr>
+
+                <tr>
+                    <td>19</td>
+                    <td><b>Remove Nth Node From End of List</b></td>
+                    <td><span class="badge-bf">Two Passes</span> Traverse the entire linked list to find its length L. Do a second traversal to stop at node (L - N) and remove the next node.</td>
+                    <td>Double Finish Line</td>
+                    <td>Draw a linked list. Draw an arrow running all the way to the end (Pass 1). Draw a second arrow stopping just before the target (Pass 2).</td>
+                    <td><span class="badge-opt">Fast & Slow Pointers (One Pass)</span></td>
+                    <td>The Fixed-Gap Runners</td>
+                    <td>Send a 'Fast' pointer exactly N steps ahead. Then, move both 'Fast' and 'Slow' at the same speed. When 'Fast' hits the end, 'Slow' is right before the target node.</td>
+                    <td>Draw a linked list. Place 'Fast' 2 nodes ahead of 'Slow'. Draw a rigid stick connecting them. Slide both right until 'Fast' falls off the end. 'Slow' bypasses the next node.</td>
+                    <td>Single Segmented Line</td>
+                    <td>Draw a line of length L. Show the Fast pointer covering it in one go. Time is strictly O(L) with only one traversal.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw exactly two pointer variables (Fast, Slow). No new nodes or data structures are created (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>20</td>
+                    <td><b>Valid Parentheses</b></td>
+                    <td><span class="badge-bf">String Replacement</span> Repeatedly search for "()", "{}", and "[]" and replace them with empty strings. If the string becomes empty, it's valid.</td>
+                    <td>The Eraser</td>
+                    <td>Draw the string `"{[()]}"`. Erase the middle `()`. Then erase the `[]`. Then erase the `{}`. Emphasize that string shifting makes this O(N²).</td>
+                    <td><span class="badge-opt">Stack (LIFO)</span></td>
+                    <td>The Spring-Loaded Tube</td>
+                    <td>Read left to right. If it's an open bracket, push it into the tube. If it's a closed bracket, check if it matches the top of the tube. If yes, pop it. If no, invalid.</td>
+                    <td>Draw a vertical bucket. Push `(`, `[`, `{` down into it. When `}` arrives, check the top of the bucket. Since it's `{`, cross them both out.</td>
+                    <td>Single Pass + O(1) Ops</td>
+                    <td>Draw a single straight arrow reading the string (O(N)). Next to it, draw a tiny push/pop box to show stack operations take O(1). Total time O(N).</td>
+                    <td>Draw multiple intermediate string copies being created during the replacement process.</td>
+                    <td>Draw a vertical Stack data structure. In the worst case (all open brackets), it grows to size O(N).</td>
+                </tr>
+
+                <tr>
+                    <td>21</td>
+                    <td><b>Merge Two Sorted Lists</b></td>
+                    <td><span class="badge-bf">Array Extraction & Sort</span> Traverse both lists, put all values into an array, sort the array O(N log N), and build a brand new linked list.</td>
+                    <td>The Sorting Funnel</td>
+                    <td>Draw two linked lists dumping their nodes into an unsorted bucket. Draw a sorting machine that spits out a clean, new list. Emphasize the wasted O(N log N) time.</td>
+                    <td><span class="badge-opt">Two Pointers + Dummy Node</span></td>
+                    <td>The Zipper</td>
+                    <td>Create a `dummy` node. Place pointer P1 on List 1 and P2 on List 2. Compare P1 and P2. Attach the smaller node to the `dummy` tail, then advance that pointer.</td>
+                    <td>Draw List 1 and List 2. Draw a star (Dummy) with an arrow `current`. Point `current` to the smaller of P1/P2. Cross out the old pointer and move it forward.</td>
+                    <td>Parallel Tracks</td>
+                    <td>Draw two parallel lines of length M and N. Draw a zipper merging them perfectly in one pass. Time is strictly O(M + N).</td>
+                    <td>Draw a completely new array of size M+N (O(M+N) space).</td>
+                    <td>Draw only a few pointer variables (Dummy, Current, P1, P2) weaving existing nodes together (O(1) space).</td>
+                </tr>
+
+                <tr>
+                    <td>22</td>
+                    <td><b>Generate Parentheses</b></td>
+                    <td><span class="badge-bf">Generate All & Validate</span> Create every possible string of '(' and ')' of length 2N (which is 2^(2N) strings), then check if each string is valid.</td>
+                    <td>Massive Explosion Tree</td>
+                    <td>Draw a giant binary tree of height 2N where every node splits into '(' and ')'. At the bottom, draw a slow scanner checking every single leaf node for validity.</td>
+                    <td><span class="badge-opt">Backtracking (Constrained DFS)</span></td>
+                    <td>The Guarded Gates</td>
+                    <td>Build the string recursively. You can only add '(' if `open < N`. You can only add ')' if `close < open`. If length is 2N, record the string.</td>
+                    <td>Draw a root node. Branch left for '(' and right for ')'. Put a lock icon on the right branch if `open == close` (meaning you can't add a closing bracket yet).</td>
+                    <td>Pruned Tree Counter</td>
+                    <td>Draw a tree but physically cross out entire branches early on. The time complexity is bounded by the Nth Catalan number, roughly O(4^N / sqrt(N)).</td>
+                    <td>Draw 2^(2N) strings taking up enormous memory space.</td>
+                    <td>Draw the recursion stack (max depth 2N) and a single string builder modifying in place. Space is O(N).</td>
+                </tr>
+
+                <tr>
+                    <td>23</td>
+                    <td><b>Merge k Sorted Lists</b></td>
+                    <td><span class="badge-bf">Extract All & Sort</span> Dump every single node from all K lists into one massive array, sort it, and recreate the list.</td>
+                    <td>The Giant Blender</td>
+                    <td>Draw K separate lists pouring into one massive array. Write O(N log N) where N is the TOTAL number of nodes across all lists.</td>
+                    <td><span class="badge-opt">Min-Heap (Priority Queue)</span></td>
+                    <td>The Vending Machine</td>
+                    <td>Put the head node of all K lists into a Min-Heap. Pop the smallest node, attach it to the result, and push that node's `next` into the heap.</td>
+                    <td>Draw a funnel (Heap) holding K items. Drop the smallest item out the bottom. Immediately replace it with the next item from the list it came from.</td>
+                    <td>Logarithmic Extraction</td>
+                    <td>Draw an N-length timeline. At each step, draw a small O(log K) box representing the heap push/pop operation. Total Time: O(N log K).</td>
+                    <td>Draw a massive array of size N (Total nodes). O(N) space.</td>
+                    <td>Draw a fixed-size Triangle (Min-Heap) that never holds more than K elements. Space is O(K) for the heap.</td>
+                </tr>
+
+                <tr>
+                    <td>24</td>
+                    <td><b>Swap Nodes in Pairs</b></td>
+                    <td><span class="badge-bf">Value Swapping</span> Traverse the list and simply swap the integer values inside the nodes (e.g., node.val = next.val).</td>
+                    <td>The Shell Game</td>
+                    <td>Draw nodes. Physically erase the numbers inside the boxes and swap them. Note that this is generally considered a bad practice in interview settings.</td>
+                    <td><span class="badge-opt">Pointer Manipulation + Dummy Node</span></td>
+                    <td>The Leapfrog</td>
+                    <td>Use a dummy node pointing to the head. Grab a pair of nodes (A and B). Make Dummy point to B, B point to A, and A point to whatever comes after B.</td>
+                    <td>Draw `prev -> A -> B -> next`. Draw curved arrows overriding the straight ones: `prev` arcs to `B`, `B` arcs backward to `A`, `A` arcs to `next`.</td>
+                    <td>Segmented Line</td>
+                    <td>Draw a line. Chop it into segments of 2. Draw a quick rotation arrow over each segment. We touch every node exactly once. O(N) time.</td>
+                    <td>O(1) space, but alters data instead of structure.</td>
+                    <td>Draw three pointers (`prev`, `curr`, `next_pair`). We only manipulate existing links in memory, so space is strictly O(1).</td>
+                </tr>
+
+                <tr>
+                    <td>25</td>
+                    <td><b>Reverse Nodes in k-Group</b></td>
+                    <td><span class="badge-bf">Array Extraction</span> Extract K values into an array, reverse the array, put the values back into the nodes, repeat.</td>
+                    <td>The Data Shuffler</td>
+                    <td>Draw an array of size K below the linked list. Draw arrows pulling values down, shuffling them, and pushing them back up into the nodes.</td>
+                    <td><span class="badge-opt">In-Place Pointer Reversal</span></td>
+                    <td>The Segment Flipper</td>
+                    <td>Find the Kth node. If it exists, sever the connection, reverse the sub-list of size K using standard list reversal, then reconnect the edges.</td>
+                    <td>Draw a list. Put a bracket around K nodes. Reverse the arrows inside the bracket. Draw the `prevGroupTail` pointing to the new head of this bracket.</td>
+                    <td>Chunked Timeline</td>
+                    <td>Draw a timeline. Divide it into blocks of K. Process each block linearly. Total time is exactly O(N).</td>
+                    <td>Draw an array of size K allocating and deallocating in memory continuously. Space is O(K).</td>
+                    <td>Draw standard reversal pointers (`prev`, `curr`, `next`). Since we just flip existing arrows in memory, it is perfectly O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>26</td>
+                    <td><b>Remove Duplicates from Sorted Array</b></td>
+                    <td><span class="badge-bf">New Array / Hash Set</span> Iterate through the array, add unique elements to a new array or Hash Set, then copy them back.</td>
+                    <td>The Extra Bucket</td>
+                    <td>Draw the original array. Draw a separate empty array below it. Draw arrows moving only unique numbers into the bottom array, highlighting the O(N) extra space.</td>
+                    <td><span class="badge-opt">Two Pointers (Reader/Writer)</span></td>
+                    <td>The Overwriter</td>
+                    <td>Keep a 'Slow' pointer for where the next unique element should go, and a 'Fast' pointer to scan for new unique elements. When Fast finds a new number, Slow writes it and moves up.</td>
+                    <td>Draw an array. Place `S` (Slow) and `F` (Fast) at index 1. Slide `F` right until `arr[F] != arr[F-1]`. Draw a curved arrow from `F` overwriting the value at `S`, then step `S` forward.</td>
+                    <td>Single Parallel Track</td>
+                    <td>Draw a line from 0 to N representing the Fast pointer. Draw a shorter, segmented line beneath it for the Slow pointer. Total time is strictly O(N).</td>
+                    <td>Draw a separate array of size N taking up extra memory.</td>
+                    <td>Draw only two variables (`Slow` and `Fast`) operating within the confines of the original array block. Perfectly O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>27</td>
+                    <td><b>Remove Element</b></td>
+                    <td><span class="badge-bf">Filter to New Array</span> Create a brand new array of the same size, loop through the original, and only copy elements that don't match the `val`.</td>
+                    <td>The Sieve</td>
+                    <td>Draw a sieve or filter. Drop the array elements through it. Watch the target `val` get stuck while the rest fall into a new array block.</td>
+                    <td><span class="badge-opt">Two Pointers (In-Place Write)</span></td>
+                    <td>The Garbage Compactor</td>
+                    <td>Similar to Q26. A 'Fast' pointer reads every element. If it's NOT the target value, the 'Slow' pointer writes it down and increments. The target values simply get left behind/overwritten.</td>
+                    <td>Draw the array. Put `S` and `F` at index 0. If `arr[F] == val`, move `F` right. If `arr[F] != val`, draw an arrow copying `arr[F]` to `arr[S]`, then move both right.</td>
+                    <td>Single Linear Pass</td>
+                    <td>Draw a single straight arrow from left to right. We look at each element exactly once. O(N) time complexity.</td>
+                    <td>Draw a new array allocated in memory (O(N) space).</td>
+                    <td>Draw the original array with a physical line drawn at index `S` at the end, showing where the "valid" array stops. O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>28</td>
+                    <td><b>Find the Index of the First Occurrence in a String</b></td>
+                    <td><span class="badge-bf">Nested Loops (Sliding Window)</span> For every character in the `haystack`, try to match the entire `needle` character by character.</td>
+                    <td>The Brute Scanner</td>
+                    <td>Draw the haystack. Draw a box the size of the needle. Slide the box one letter at a time. For every step, draw M smaller arrows checking the letters inside the box. O(N*M) time.</td>
+                    <td><span class="badge-opt">KMP Algorithm (LPS Array)</span></td>
+                    <td>The Smart Skipper</td>
+                    <td>Preprocess the `needle` to create an LPS (Longest Proper Prefix which is also Suffix) array. When a mismatch occurs, use the LPS array to skip redundant character checks instead of resetting to the beginning.</td>
+                    <td>Draw the haystack and needle. When a mismatch hits at index `j`, look up `LPS[j-1]`. Draw a long sweeping arrow shifting the needle forward, bypassing already matched prefixes.</td>
+                    <td>Two Independent Linear Passes</td>
+                    <td>Draw a short line for building the LPS array O(M). Draw a separate line for scanning the haystack O(N). Since we never step backward in the haystack, time is O(N+M).</td>
+                    <td>Draw no extra memory, but emphasize the terrible O(N*M) time overlap.</td>
+                    <td>Draw a small auxiliary array (LPS) of size M (length of the needle). Space is strictly O(M).</td>
+                </tr>
+
+                <tr>
+                    <td>29</td>
+                    <td><b>Divide Two Integers</b></td>
+                    <td><span class="badge-bf">Repeated Subtraction</span> Subtract the divisor from the dividend in a `while` loop, keeping a tally. Will Time Limit Exceed (TLE) for huge numbers (e.g., 2^31 / 1).</td>
+                    <td>The Tally Counter</td>
+                    <td>Draw a massive pile of blocks (Dividend). Draw a tiny bucket (Divisor) scooping them away one by one. Write out O(N) where N is the final quotient.</td>
+                    <td><span class="badge-opt">Bit Manipulation (Exponential Subtraction)</span></td>
+                    <td>The Doubling Scooper</td>
+                    <td>Shift the divisor left (`<< 1`), effectively doubling it, until it's larger than the dividend. Subtract that massive chunk, add the corresponding power of 2 to the quotient, and repeat with the remainder.</td>
+                    <td>Draw the Dividend block. Draw a Divisor block that visually doubles in size (1x, 2x, 4x, 8x) until it almost overflows the Dividend. Subtract the largest chunk, write down the multiplier, and restart.</td>
+                    <td>Logarithmic Steps</td>
+                    <td>Draw a timeline. At each step, cross out half of the remaining dividend. Time complexity is O(log(Dividend)^2) due to the inner doubling loop.</td>
+                    <td>O(1) space, but functionally broken for extreme 32-bit limits.</td>
+                    <td>Draw two variables accumulating the quotient and the current power of 2. O(1) extra space.</td>
+                </tr>
+
+                <tr>
+                    <td>30</td>
+                    <td><b>Substring with Concatenation of All Words</b></td>
+                    <td><span class="badge-bf">Generate Permutations</span> Generate all possible mathematical permutations of the given words (O(W!)), combine them into strings, and search for them in the main string.</td>
+                    <td>The Factorial Explosion Tree</td>
+                    <td>Draw a tree generating all word permutations. Note the staggering O(W!) complexity, meaning even 10 words will immediately crash the program.</td>
+                    <td><span class="badge-opt">Sliding Window + Hash Maps</span></td>
+                    <td>The Chunked Window Scanner</td>
+                    <td>Count word frequencies in a map. Slide a window across the string. Inside the window, jump by `word_length` chunks, checking if the chunked words match the target map's frequencies.</td>
+                    <td>Draw the main string. Bracket a window of size `W * len`. Inside the bracket, draw vertical lines slicing it into individual words. Compare those slices to a drawn Hash Map of target words.</td>
+                    <td>Chunked Linear Scan</td>
+                    <td>Draw an outer loop looping `word_length` times (offset). Inside, draw a window sliding across the string O(N). Total time is roughly O(N * word_length).</td>
+                    <td>Draw gigabytes of permutations destroying the heap memory.</td>
+                    <td>Draw two Hash Maps (one for the target words, one for the current window's words) storing at most W keys. Space is strictly O(W).</td>
+                </tr>
+
+                <tr>
+                    <td>31</td>
+                    <td><b>Next Permutation</b></td>
+                    <td><span class="badge-bf">Generate All Permutations</span> Create a list of every single possible combination, sort them lexographically, find the current one, and pick the next one.</td>
+                    <td>The Factorial Mountain</td>
+                    <td>Draw a massive list of N! (factorial) rows. Highlight how searching through millions of rows for an array of just 10 elements takes catastrophic O(N!) time.</td>
+                    <td><span class="badge-opt">Find Dip, Swap, Reverse</span></td>
+                    <td>The Peak and Valley Graph</td>
+                    <td>Scan right-to-left to find the first "dip" (decreasing number). Find the smallest number to its right that is larger than the dip. Swap them. Reverse everything after the swap index.</td>
+                    <td>Draw the array as a 2D line graph. Scanning left from the end, draw an arrow pointing to the first drop in elevation (the dip). Swap it with a slightly higher peak to its right, then draw a flat line showing the rest being sorted (reversed).</td>
+                    <td>Three Segmented Lines</td>
+                    <td>Draw three straight horizontal arrows, representing the three distinct linear passes (find dip, find swap, reverse). 3 * O(N) = O(N) time.</td>
+                    <td>Allocates massive 2D arrays to hold N! permutations. O(N!) space.</td>
+                    <td>Draw the single original array being modified perfectly in-place. No extra memory used. O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>32</td>
+                    <td><b>Longest Valid Parentheses</b></td>
+                    <td><span class="badge-bf">Check All Substrings</span> Generate every possible even-length substring and use a stack to check if it's a valid parenthesis sequence.</td>
+                    <td>The Exhaustive Scanner</td>
+                    <td>Draw a massive string. Bracket every possible chunk. Draw a miniature stack checking every single chunk individually. O(N³) time.</td>
+                    <td><span class="badge-opt">Two Counters (Left/Right Passes)</span></td>
+                    <td>The Twin Scales</td>
+                    <td>Keep two counters: `left` and `right`. Scan left-to-right. If `right == left`, record length. If `right > left`, reset counters to 0. Do a second pass right-to-left (resetting if `left > right`).</td>
+                    <td>Draw the string. Draw two tally boxes (L and R). Scan forward. When L and R match, draw a "Max Length" box updating. If R exceeds L, draw a red "X" and zero out the tallies. Repeat backwards.</td>
+                    <td>Two Parallel Timelines</td>
+                    <td>Draw an arrow going left-to-right across the string, and another going right-to-left. 2 * O(N) passes = O(N) time.</td>
+                    <td>Draw heavy auxiliary strings or stack traces for every substring.</td>
+                    <td>Draw exactly three integer variables (`left`, `right`, `maxLength`). No stacks or arrays needed. O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>33</td>
+                    <td><b>Search in Rotated Sorted Array</b></td>
+                    <td><span class="badge-bf">Linear Scan</span> Ignore the fact that it's partially sorted and just check every single element from index 0 to N.</td>
+                    <td>The Slow Walker</td>
+                    <td>Draw a pointer starting at 0 and moving step-by-step to the end. Write O(N) overhead, completely wasting the "sorted" clue.</td>
+                    <td><span class="badge-opt">Modified Binary Search</span></td>
+                    <td>The Fault Line</td>
+                    <td>Find `mid`. Because it's rotated, at least ONE half (left or right of mid) MUST be perfectly sorted. Check if the target falls within the strict bounds of that sorted half. If yes, search there; if no, search the other half.</td>
+                    <td>Draw a line graph that goes up, breaks, drops down, and goes up again. Draw a vertical line down the middle. Circle the half that is an unbroken straight line and write "Is Target Here?"</td>
+                    <td>Halving Block</td>
+                    <td>Draw an array. Cross out half. Cross out half of the remainder. Standard O(log N) time visual.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw exactly three pointer variables (`left`, `right`, `mid`) converging. Space is purely O(1).</td>
+                </tr>
+
+                <tr>
+                    <td>34</td>
+                    <td><b>Find First and Last Position of Element in Sorted Array</b></td>
+                    <td><span class="badge-bf">Scan and Extend</span> Do a linear scan to find the first target. Then keep moving right one by one until the target stops repeating.</td>
+                    <td>The Bleeding Marker</td>
+                    <td>Draw a sorted array with a block of identical numbers. Draw an arrow hitting the first one, then bleeding over one step at a time until the numbers change. Worst case (all same numbers) is O(N).</td>
+                    <td><span class="badge-opt">Double Binary Search</span></td>
+                    <td>The Left/Right Brackets</td>
+                    <td>Run standard binary search to find the target. To find the *first* occurrence, purposely squeeze the `right` pointer inward even if you find the target. To find the *last*, squeeze the `left` pointer.</td>
+                    <td>Draw an array. Draw one binary search tree converging to place a `[` on the leftmost target. Draw a completely separate binary search tree converging to place a `]` on the rightmost target.</td>
+                    <td>Two Halving Blocks</td>
+                    <td>Draw two separate array blocks. Show both getting chopped in half logarithmically. O(log N) + O(log N) = O(log N) total time.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw standard binary search pointers. Reused for both searches. Perfectly O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>35</td>
+                    <td><b>Search Insert Position</b></td>
+                    <td><span class="badge-bf">Linear Search</span> Iterate through the array until you find the target OR a number greater than the target.</td>
+                    <td>The Tripwire</td>
+                    <td>Draw a pointer walking left to right. Draw a literal tripwire at the first element `>= target`. O(N) time.</td>
+                    <td><span class="badge-opt">Standard Binary Search</span></td>
+                    <td>The Closing Gap</td>
+                    <td>Standard binary search. If target is not found, the `left` pointer will naturally cross the `right` pointer and land on the exact correct insertion index.</td>
+                    <td>Draw a sorted array. Draw `L` and `R` pointers closing in. Draw the moment they cross: `R` is now behind `L`. Draw an arrow pointing at `L` saying "Insert Here".</td>
+                    <td>Halving Block</td>
+                    <td>Draw a single block getting halved step by step until it reduces to 0. O(log N) time.</td>
+                    <td>O(1) space.</td>
+                    <td>Draw only three pointers (`L`, `R`, `mid`). O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>36</td>
+                    <td><b>Valid Sudoku</b></td>
+                    <td><span class="badge-bf">Triple Pass Filtering</span> Scan the entire 9x9 board three separate times: once for rows, once for columns, and once for the 3x3 sub-boxes.</td>
+                    <td>The Clunky Scanner</td>
+                    <td>Draw a 9x9 grid. Draw an arrow scanning left-to-right 9 times. Then an arrow scanning top-to-bottom 9 times. Then 9 individual boxes scanning inside themselves.</td>
+                    <td><span class="badge-opt">Single Pass (Hash Sets)</span></td>
+                    <td>The Triple Tally</td>
+                    <td>Iterate exactly once. As you read a number at `(row, col)`, check if it exists in `RowSet[row]`, `ColSet[col]`, or `BoxSet[(row/3)*3 + col/3]`. If not, add it to all three.</td>
+                    <td>Draw one cell at `(r, c)`. Draw three distinct buckets (Row, Col, Box) next to it. Drop the number into all three. If a bucket already has that number, draw a red "X" (Invalid).</td>
+                    <td>Single 9x9 Block</td>
+                    <td>Draw a single 81-cell square. Shade it in progressively from top-left to bottom-right exactly once. O(1) time (since the board is strictly 9x9, it's a constant 81 operations).</td>
+                    <td>O(1) space, but the time waste is the real issue.</td>
+                    <td>Draw 3 arrays of 9 HashSets. Since the board size is fixed (9x9), the space is technically bounded by a constant. O(1) space complexity.</td>
+                </tr>
+
+                <tr>
+                    <td>37</td>
+                    <td><b>Sudoku Solver</b></td>
+                    <td><span class="badge-bf">Generate All Grids</span> Fill every empty cell with every possible combination of numbers 1-9, generating 9^(empty cells) boards, then check which one is valid.</td>
+                    <td>The Universe Exploder</td>
+                    <td>Draw a blank Sudoku board. Draw 9 arrows splitting off the first empty cell, then 9 off each of those. The visual should look like an impossibly massive, chaotic web.</td>
+                    <td><span class="badge-opt">Backtracking (DFS)</span></td>
+                    <td>The Dead-End Reverser</td>
+                    <td>Find an empty cell. Try placing 1-9. If a number is valid (using Valid Sudoku logic), place it and recursively call the solver for the next cell. If you hit a wall, erase the number (backtrack) and try the next one.</td>
+                    <td>Draw a mini 3x3 grid. Write a '2'. Draw an arrow to the next cell, write '5'. Hit a wall. Erase '5', write '6'. Erase '6', write '7'. Draw the "erase and rewrite" motion heavily.</td>
+                    <td>Pruned Decision Tree</td>
+                    <td>Draw a tree branching out 9 ways. But heavily cross out branches almost immediately as they break Sudoku rules. Time is O(9^M) where M is empty cells, but vastly smaller in practice.</td>
+                    <td>Millions of full 9x9 boards held in memory simultaneously.</td>
+                    <td>Draw the original 9x9 board modifying in-place, plus a recursion stack depth of up to 81. Space is O(1) (or O(81) stack frames).</td>
+                </tr>
+
+                <tr>
+                    <td>38</td>
+                    <td><b>Count and Say</b></td>
+                    <td><span class="badge-bf">Heavy String Concatenation</span> Iterate string by string, adding characters together using `str = str + count + char`. This creates massive memory overhead due to string immutability.</td>
+                    <td>The Garbage Generator</td>
+                    <td>Draw the string "11". Add "2" to make a new string "112". Add "1" to make "1121". Draw the old strings piling up in a "Garbage Collector" bin.</td>
+                    <td><span class="badge-opt">Two Pointers + String Builder</span></td>
+                    <td>The Chunk Counter</td>
+                    <td>To generate the next sequence, read the current sequence using a 'Start' and 'End' pointer. Move 'End' until the character changes. The count is `End - Start`. Append `count + char` to a fast StringBuilder.</td>
+                    <td>Draw "111221". Put 'S' and 'E' at index 0. Slide 'E' right until it hits '2'. Bracket the "111". Write "Three 1s" -> append "31". Move 'S' to 'E'.</td>
+                    <td>Expanding Triangle</td>
+                    <td>Draw row 1 as a dot. Row 2 slightly longer. Row N much longer. Time is roughly O(2^N) or bounded by the length of the strings generated at each step.</td>
+                    <td>Draw dozens of intermediate string variables taking up O(2^N) space and forcing constant memory reallocation.</td>
+                    <td>Draw a single mutable StringBuilder. Space is O(L) where L is the length of the maximum generated string.</td>
+                </tr>
+
+                <tr>
+                    <td>39</td>
+                    <td><b>Combination Sum</b></td>
+                    <td><span class="badge-bf">Generate All Subsets (With Repetition)</span> Create a deeply nested loop to just brute-force every combination of numbers up to the target length, then filter those that match the sum.</td>
+                    <td>The Infinite Blender</td>
+                    <td>Draw numbers flying into a blender, pouring out thousands of arrays. Draw a filter at the bottom that only lets arrays summing to the `target` pass through.</td>
+                    <td><span class="badge-opt">Backtracking (Include/Exclude)</span></td>
+                    <td>The Fork in the Road</td>
+                    <td>At each number, make a choice: Path A) Include this number again and subtract it from the target. Path B) Move on to the next number. Base case: Target hits 0 (Save) or < 0 (Backtrack).</td>
+                    <td>Draw a target number (e.g., 7). Draw a fork. Left: pick '2' (Target becomes 5, stay on '2'). Right: skip '2' (Target remains 7, move to '3'). </td>
+                    <td>Deep Left-Leaning Tree</td>
+                    <td>Draw a binary decision tree. Make the left branches (Include) go very deep (Target / min_element times), and right branches (Exclude) go shallow (Length of array). Time is O(2^target).</td>
+                    <td>Creates huge, unnecessary arrays of invalid sums before filtering them.</td>
+                    <td>Draw a single `current_combination` array that grows (push) and shrinks (pop) as it traverses the tree. Space is O(Target / Min Element) for the recursion stack.</td>
+                </tr>
+
+                <tr>
+                    <td>40</td>
+                    <td><b>Combination Sum II</b></td>
+                    <td><span class="badge-bf">Combination Sum 1 + Hash Set</span> Treat it like the previous problem, but since the input has duplicates, dump all successful arrays into a Hash Set to remove identical combinations at the very end.</td>
+                    <td>The Duplicate Sieve</td>
+                    <td>Draw a backtracking tree spitting out arrays: `[1, 2, 5]`, `[1, 7]`, and another `[1, 2, 5]`. Draw them hitting a Hash Set wall where the duplicate bounces off.</td>
+                    <td><span class="badge-opt">Sort + Backtracking (Skip Dupes)</span></td>
+                    <td>The Smart Skipper</td>
+                    <td>Sort the array first. In the backtracking loop, if `i > start` and `arr[i] == arr[i-1]`, skip it! This prevents generating duplicate branches at the exact same depth level entirely.</td>
+                    <td>Draw a sorted array: `[1, 1, 2, 5, 6]`. Start a branch with the first '1'. When the loop moves to the second '1', draw a giant red curved arrow jumping over it to '2'.</td>
+                    <td>Severed Tree Branches</td>
+                    <td>Draw the same backtracking tree, but draw thick red lines cutting off massive subtrees before they even start because of the `if` skip condition. Time is O(2^N).</td>
+                    <td>Draw a massive Hash Set holding heavy array objects to deduplicate.</td>
+                    <td>Draw a single `current_combination` array and the recursion stack. Because we sorted and skipped, no Hash Set is needed. Space is O(N).</td>
+                </tr>
+
+                <tr>
+                    <td>41</td>
+                    <td><b>First Missing Positive</b></td>
+                    <td><span class="badge-bf">Sort & Scan</span> Sort the array first, then scan from left to right looking for the number 1, then 2, then 3, until a gap is found.</td>
+                    <td>The Snail Sort</td>
+                    <td>Draw an array. Draw a massive O(N log N) sorting machine above it, taking up unnecessary time. Below it, draw a scanner looking for a gap.</td>
+                    <td><span class="badge-opt">Cyclic Sort (Index as Map)</span></td>
+                    <td>The Rightful Chair</td>
+                    <td>Every number `x` belongs in index `x-1` (e.g., the number 5 belongs at index 4). Swap numbers into their "rightful chairs" until they are out of bounds or already correct. Then find the first empty chair.</td>
+                    <td>Draw an array. Point at number '3' in index 0. Draw a curved arrow picking up '3' and swapping it with whatever is at index 2. Repeat until index 0 holds '1' or a useless number (like -5).</td>
+                    <td>The Swapping Chain</td>
+                    <td>Draw a timeline where each step is a swap. Emphasize that every number is swapped at most ONCE into its correct place. Total time strictly bounded to O(N).</td>
+                    <td>Requires O(N log N) time overhead or an O(N) Hash Set.</td>
+                    <td>Draw the original array shuffling elements in-place. Because we hijack the array's own indices to act as our Hash Map, space is O(1).</td>
+                </tr>
+
+                <tr>
+                    <td>42</td>
+                    <td><b>Trapping Rain Water</b></td>
+                    <td><span class="badge-bf">Look Left, Look Right</span> For every single bar, scan all the way to the left to find the max height, and all the way to the right to find the max height.</td>
+                    <td>The Exhaustive Radar</td>
+                    <td>Draw a bar chart. From the middle bar, draw a radar wave scanning all the way left, then all the way right. Repeat this for every single bar to show O(N²) wasted time.</td>
+                    <td><span class="badge-opt">Two Pointers (Inward Squeeze)</span></td>
+                    <td>The Leaking Buckets</td>
+                    <td>Maintain `left_max` and `right_max` variables. Place L and R pointers at the ends. Whichever max is smaller dictates the water level for its side. Calculate water for the smaller side, then move that pointer inward.</td>
+                    <td>Draw a bar chart. Put L on the left, R on the right. If L's max is shorter than R's max, draw a blue water block above L, and move L inward. Erase and redraw the max line as they climb.</td>
+                    <td>Squeezing Timeline</td>
+                    <td>Draw a horizontal line of length N. Draw arrows from both ends moving strictly inward until they collide. Exactly N steps = O(N) time.</td>
+                    <td>Draw separate left_max and right_max arrays of size N taking up memory.</td>
+                    <td>Draw exactly four pointer variables (L, R, left_max, right_max). No arrays needed. Perfectly O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>43</td>
+                    <td><b>Multiply Strings</b></td>
+                    <td><span class="badge-bf">Language Defaults (BigInt)</span> Just parse the strings into native big integers, multiply them, and turn them back into strings (which defeats the whole purpose of the problem).</td>
+                    <td>The Cheater's Box</td>
+                    <td>Draw a black box labeled "BigInt()". Put two strings in, get a string out. Draw a red "X" through it because interviewers hate this.</td>
+                    <td><span class="badge-opt">Array Math (Grade School Multiplication)</span></td>
+                    <td>The Shifting Grid</td>
+                    <td>Multiply digit by digit from right to left. The product of `num1[i]` and `num2[j]` is placed at indices `[i + j, i + j + 1]` in a result array.</td>
+                    <td>Draw standard elementary school vertical multiplication. Draw arrows linking the top digit `i` and bottom digit `j` directly into a pre-sized array box at position `i+j+1` (holding the digit) and `i+j` (holding the carry).</td>
+                    <td>Matrix Area</td>
+                    <td>Draw a grid of M rows and N columns. Shade in every cell to show that every digit of `num1` must multiply with every digit of `num2`. O(M * N) time.</td>
+                    <td>Draw giant, memory-heavy BigInt objects being instantiated.</td>
+                    <td>Draw a single integer array of size `M + N` (the maximum possible length of the product). Space is O(M + N).</td>
+                </tr>
+
+                <tr>
+                    <td>44</td>
+                    <td><b>Wildcard Matching</b></td>
+                    <td><span class="badge-bf">Pure Recursion</span> Every time you see a `*`, branch the path: one path where `*` matches 0 characters, one where it matches 1, one where it matches 2, etc.</td>
+                    <td>The Infinite Splinter</td>
+                    <td>Draw a string and a pattern with a `*`. Draw a tree where the `*` node explodes into N branches (matching 0, 1, 2... letters). O(2^N) time.</td>
+                    <td><span class="badge-opt">Two Pointers + Greedy Backtrack</span></td>
+                    <td>The Anchor and Rubber Band</td>
+                    <td>Scan left-to-right. If you hit a `*`, "anchor" a pointer there. Assume it matches 0 characters and move on. If you hit a mismatch later, rubber-band back to the anchor, assume it matches 1 character, and try again.</td>
+                    <td>Draw string S and pattern P. Draw a star icon over the `*` in P. Draw a pointer moving right in S. When a mismatch hits, draw a curved arrow snapping the pointer back to the star icon, shifting it right by one.</td>
+                    <td>Single Scan Line (Mostly)</td>
+                    <td>Draw a line representing S. Draw small, occasional loops snapping back. Emphasize that in the average case, it's O(N + M) time, far faster than DP.</td>
+                    <td>Draw a massive call stack or a full M x N DP table.</td>
+                    <td>Draw exactly four pointers (`s_idx`, `p_idx`, `star_idx`, `match_idx`). Extremely memory efficient at O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>45</td>
+                    <td><b>Jump Game II</b></td>
+                    <td><span class="badge-bf">DFS / Recursion</span> From index 0, recursively try every single possible jump length. Keep a global minimum of jumps to reach the end.</td>
+                    <td>The Exhausting Tree</td>
+                    <td>Draw a tree where each node branches out equal to its jump value. Highlight how many overlapping paths calculate the exact same jumps. O(N!) time.</td>
+                    <td><span class="badge-opt">Greedy (BFS-Style Window)</span></td>
+                    <td>The Expanding Flashlight</td>
+                    <td>Keep track of the `current_jump_end` and the `farthest` you can reach. Iterate through the array. Update `farthest`. When you hit `current_jump_end`, you *must* jump, so increment jump count and update the end to `farthest`.</td>
+                    <td>Draw the array. Bracket index 0. That's Jump 0. Look at the values inside the bracket to find the furthest reach. Bracket that new range. That's Jump 1. Repeat until the bracket covers the end.</td>
+                    <td>Single Chunked Line</td>
+                    <td>Draw a single straight arrow from left to right. Draw vertical dividers representing the forced jumps. We only look at each element once. O(N) time.</td>
+                    <td>Draw a deep recursion stack going all the way to the end of the array.</td>
+                    <td>Draw exactly three variables (`jumps`, `current_end`, `farthest`). We never look back and never store paths. O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>46</td>
+                    <td><b>Permutations</b></td>
+                    <td><span class="badge-bf">Array Copying DFS</span> Build permutations by creating new arrays at every step, passing the remaining numbers down to the next recursive call.</td>
+                    <td>The Exploding Conveyor Belt</td>
+                    <td>Draw an initial array. Draw lines branching down where every branch creates a brand new physical copy of the array minus one element. O(N * N!) time due to heavy copying.</td>
+                    <td><span class="badge-opt">Backtracking (In-Place Swap)</span></td>
+                    <td>The Swapping Tree</td>
+                    <td>Iterate through the array. Swap the current element with the `start` index, recursively call the function for the next index, and then backtrack by swapping them back.</td>
+                    <td>Draw an array `[1, 2, 3]`. Point at index 0. Swap `1` with itself, branch down. Swap `1` with `2`, branch down. Swap `1` with `3`, branch down. Always draw a curved arrow swapping them back when moving up.</td>
+                    <td>Factorial Splitting Node</td>
+                    <td>Draw a root node splitting into N branches. Each of those splits into N-1 branches. The total leaves exactly equal N!. Time is exactly O(N * N!).</td>
+                    <td>Draw N! separate arrays scattered across memory. Space is easily O(N * N!).</td>
+                    <td>Draw exactly ONE array. Emphasize that all branches of the tree just modify this single array in place. Space is O(N) for the recursion stack!</td>
+                </tr>
+
+                <tr>
+                    <td>47</td>
+                    <td><b>Permutations II</b></td>
+                    <td><span class="badge-bf">Permutations 1 + Hash Set</span> Run the exact same brute force algorithm as Q46, but push the final arrays into a global Hash Set to filter out the duplicates caused by repeating numbers.</td>
+                    <td>The Duplicate Funnel</td>
+                    <td>Draw the massive N! tree generating arrays. Show multiple identical arrays (like `[1, 1, 2]`) hitting a Hash Set wall, where the duplicates bounce off and die.</td>
+                    <td><span class="badge-opt">Sort + Backtracking (Used Array / Skip)</span></td>
+                    <td>The Smart Branch Pruner</td>
+                    <td>Sort the array first. Keep a boolean `used` array. If you are about to use `arr[i]`, but `arr[i] == arr[i-1]` AND `!used[i-1]`, skip it! You already explored this exact path.</td>
+                    <td>Draw a sorted array `[1, 1, 2]`. Branch off the first `1`. When the loop reaches the second `1`, draw a thick red "X" through its branch, writing "Duplicate Sibling Skipped".</td>
+                    <td>Severed Factorial Tree</td>
+                    <td>Draw the N! tree, but physically cross out massive subtrees right at the root level. Time is O(N * N!) in the worst case (all unique), but drastically faster in reality.</td>
+                    <td>Draw a massive Hash Set holding thousands of redundant array copies.</td>
+                    <td>Draw the original array, a `used` boolean array of size N, and a recursion stack of size N. Space is strictly O(N).</td>
+                </tr>
+
+                <tr>
+                    <td>48</td>
+                    <td><b>Rotate Image</b></td>
+                    <td><span class="badge-bf">New Matrix Map</span> Create a brand new N x N matrix. Loop through the original matrix and place `matrix[i][j]` directly into `new_matrix[j][n - 1 - i]`.</td>
+                    <td>The Carbon Copy</td>
+                    <td>Draw the original grid. Draw an empty grid next to it. Draw arrows pulling cells from the first grid and dropping them into their new rotated homes in the second grid.</td>
+                    <td><span class="badge-opt">Transpose + Reverse Rows</span></td>
+                    <td>The Flip and Fold</td>
+                    <td>Rotate 90 degrees in-place by doing two simple operations: 1) Transpose the matrix (swap `matrix[i][j]` with `matrix[j][i]`). 2) Reverse every row horizontally.</td>
+                    <td>Draw a square grid. Draw a diagonal line from top-left to bottom-right. Fold the numbers across the diagonal (Transpose). Then, draw a vertical line down the middle and flip the left and right sides (Reverse).</td>
+                    <td>Two Pass Matrix</td>
+                    <td>Draw a grid representing N x N. Shade the upper triangle (Transpose = O(N²)). Shade it row by row (Reverse = O(N²)). Total time = strictly O(N²).</td>
+                    <td>Draw a completely separate N x N 2D array taking up memory. O(N²) space.</td>
+                    <td>Draw a single temp variable used for swapping cells within the original matrix bounds. O(1) extra space.</td>
+                </tr>
+
+                <tr>
+                    <td>49</td>
+                    <td><b>Group Anagrams</b></td>
+                    <td><span class="badge-bf">Nested Loop Comparisons</span> For every string, compare it against every other string by sorting both of them. If they match, group them.</td>
+                    <td>The Exhaustive Sorter</td>
+                    <td>Draw N strings. Draw arrows pointing from string 1 to strings 2, 3, 4, sorting them every single time. Extremely slow: O(N² * K log K).</td>
+                    <td><span class="badge-opt">Hash Map (Sorted Key / Char Count)</span></td>
+                    <td>The Labeled Buckets</td>
+                    <td>Sort each string once and use it as a Hash Map key (e.g., "eat", "tea" -> "aet"). Append the original strings to the list at that key. Alternatively, use an array of 26 character counts as the key.</td>
+                    <td>Draw three buckets. Label one "aet", one "ant", one "abt". Draw strings ("eat", "tea", "ate") falling cleanly into the "aet" bucket.</td>
+                    <td>Linear Sorting Line</td>
+                    <td>Draw a single timeline representing N strings. Over each string, draw a small box representing the O(K log K) sort. Total time: O(N * K log K).</td>
+                    <td>O(N * K) space, but the time limit will definitely exceed first.</td>
+                    <td>Draw a single Hash Map grouping pointers/references to the strings. The total size is exactly the sum of all string characters, O(N * K) space.</td>
+                </tr>
+
+                <tr>
+                    <td>50</td>
+                    <td><b>Pow(x, n)</b></td>
+                    <td><span class="badge-bf">Iterative Multiplication</span> Run a standard `for` loop `n` times, multiplying `x` by itself. Will Time Limit Exceed (TLE) for massive powers (like n = 2^31).</td>
+                    <td>The Endless Loop</td>
+                    <td>Draw `x * x * x * x...` dragging out across the page. Write O(N) time, explicitly noting that N can be billions, making it way too slow.</td>
+                    <td><span class="badge-opt">Binary Exponentiation</span></td>
+                    <td>The Squaring Halver</td>
+                    <td>Instead of multiplying by `x`, square the base (`x = x * x`) and halve the exponent (`n = n / 2`). If `n` is odd, multiply the result by `x` once and decrement `n`.</td>
+                    <td>Draw a starting box `2^10`. Next arrow points to `4^5` (base squared, power halved). Next points to `4 * 16^2` (handled the odd power). Next points to `4 * 256^1`.</td>
+                    <td>Halving Block</td>
+                    <td>Draw a timeline representing exponent N. At each step, cross out half the remaining line. Logarithmic reduction guarantees O(log N) time.</td>
+                    <td>O(1) space, but O(N) time is unacceptable for production math libraries.</td>
+                    <td>Draw exactly two variables modifying in-place (the base and the current result). Completely O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>51</td>
+                    <td><b>N-Queens</b></td>
+                    <td><span class="badge-bf">Generate All Permutations</span> Generate every possible way to place N queens on an N×N board (N² choose N) and check each board for validity.</td>
+                    <td>The Combinatorial Explosion</td>
+                    <td>Draw an empty grid. Note that for N=8, there are over 4 billion combinations. Draw a tiny "Check" box that fails almost every time. O(N!) time.</td>
+                    <td><span class="badge-opt">Backtracking (Row-by-Row + Bitsets)</span></td>
+                    <td>The Conflict Radar</td>
+                    <td>Place a queen in row 1, then row 2, etc. Use three boolean arrays (or bitsets) to track "locked" columns, positive diagonals, and negative diagonals. If a spot is locked, skip it.</td>
+                    <td>Draw an N×N board. Place a 'Q'. Draw vertical and diagonal red lines emanating from it. Move to the next row and only place a 'Q' in the white (unshaded) spaces.</td>
+                    <td>Pruned Recursive Tree</td>
+                    <td>Draw a tree where each level is a row. Show many branches ending early (pruning) because of diagonal conflicts. Time complexity is O(N!).</td>
+                    <td>Generating and storing billions of invalid board configurations.</td>
+                    <td>Draw three small boolean arrays: `cols[N]`, `diag1[2N]`, `diag2[2N]`. Space is O(N) for the stack and state tracking.</td>
+                </tr>
+
+                <tr>
+                    <td>52</td>
+                    <td><b>N-Queens II</b></td>
+                    <td><span class="badge-bf">N-Queens I + Result List</span> Use the exact same code as Q51 to generate all full board layouts, then simply return the size of the final list.</td>
+                    <td>The Memory Waster</td>
+                    <td>Draw the solver from Q51. Show it building full 2D string arrays just to count them. Highlight the unnecessary memory allocation for strings.</td>
+                    <td><span class="badge-opt">Backtracking (Counter Only)</span></td>
+                    <td>The Invisible Board</td>
+                    <td>Same logic as Q51, but instead of building a 2D grid of strings, just increment a single `count` variable whenever a valid placement reaches the last row.</td>
+                    <td>Draw a simple "counter" box next to a backtracking tree. Every time a "Leaf" node is reached (success), show the counter incrementing `+1`. No board is drawn.</td>
+                    <td>Pruned Decision Tree</td>
+                    <td>Identical to Q51. Time is O(N!). The visualization shows that the branching factor reduces as queens are placed.</td>
+                    <td>O(N²) space to store the full list of N×N boards (strings).</td>
+                    <td>Draw only the recursion stack and the 3 conflict-tracking arrays. Space is O(N), significantly lighter than Q51.</td>
+                </tr>
+
+                <tr>
+                    <td>53</td>
+                    <td><b>Maximum Subarray</b></td>
+                    <td><span class="badge-bf">All Subarrays (Nested Loops)</span> Check every possible starting index `i` and ending index `j`, calculating the sum of each.</td>
+                    <td>The 2D Sum Grid</td>
+                    <td>Draw an array. Draw a bracket for every possible start/end pair. Total pairs = N(N+1)/2. Calculating each sum takes O(N), leading to O(N³), or O(N²) if optimized.</td>
+                    <td><span class="badge-opt">Kadane’s Algorithm (Greedy/DP)</span></td>
+                    <td>The Fresh Start</td>
+                    <td>Iterate through the array. At each element, decide: "Is it better to add this to my current sum, or start a new sum from this element?" Keep track of the global maximum.</td>
+                    <td>Draw a running total box. As you move through the array, if the box becomes negative, "empty" it (reset to 0) and start fresh with the next number.</td>
+                    <td>Single Linear Scan</td>
+                    <td>Draw a single straight arrow from left to right. One pass. Exactly N operations. O(N) time.</td>
+                    <td>Storing all subarray sums in a large table or matrix.</td>
+                    <td>Draw just two variables: `currentSum` and `maxSum`. O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>54</td>
+                    <td><b>Spiral Matrix</b></td>
+                    <td><span class="badge-bf">Simulation with Visited Matrix</span> Move right until a wall or visited cell, then down, then left, then up. Repeat. Use a boolean matrix to track visited cells.</td>
+                    <td>The Redundancy Grid</td>
+                    <td>Draw an N×M matrix and an identical boolean "Visited" matrix. Show the pointer checking the Visited matrix before every single move. O(N*M) space.</td>
+                    <td><span class="badge-opt">Boundary Shrinking</span></td>
+                    <td>The Closing Walls</td>
+                    <td>Define four boundaries: `top`, `bottom`, `left`, `right`. Traverse the top row, then increment `top`. Traverse the right col, then decrement `right`. Repeat until boundaries cross.</td>
+                    <td>Draw a grid. Draw four thick lines representing the borders. After each side is traversed, draw an arrow showing that border line physically moving inward.</td>
+                    <td>Total Cell Count</td>
+                    <td>Draw an N×M rectangle. Shade every cell exactly once in a spiral pattern. Time is strictly O(N*M).</td>
+                    <td>Draw an extra boolean matrix of size N*M. O(N*M) space.</td>
+                    <td>Draw exactly four integer variables representing the boundaries. No extra 2D arrays. O(1) auxiliary space.</td>
+                </tr>
+
+                <tr>
+                    <td>55</td>
+                    <td><b>Jump Game</b></td>
+                    <td><span class="badge-bf">Backtracking / Recursion</span> From index 0, try every possible jump distance. If any path reaches the end, return true.</td>
+                    <td>The Recursive Spiderweb</td>
+                    <td>Draw a tree where each node has `nums[i]` branches. Many branches overlap, leading to O(2^N) or O(N!) complexity.</td>
+                    <td><span class="badge-opt">Greedy (Max Reach)</span></td>
+                    <td>The Moving Horizon</td>
+                    <td>Iterate through the array. Keep a variable `farthest`. At each step, if `i > farthest`, you're stuck (return false). Otherwise, update `farthest = max(farthest, i + nums[i])`.</td>
+                    <td>Draw the array. Draw a flag representing the `farthest` reachable point. As you walk forward, push the flag as far as the current spot allows. If you ever walk past the flag, you lose.</td>
+                    <td>Single Linear Pass</td>
+                    <td>Draw a straight arrow from 0 to N. One pass, constant work at each step. O(N) time.</td>
+                    <td>Draw a massive recursion stack reaching depth N.</td>
+                    <td>Draw a single integer variable `farthest`. O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>56</td>
+                    <td><b>Merge Intervals</b></td>
+                    <td><span class="badge-bf">All-Pairs Comparison</span> Compare every interval with every other interval. If they overlap, merge them into a new interval and restart the process until no more merges occur.</td>
+                    <td>The N² Bubble Merge</td>
+                    <td>Draw circles for intervals. Draw lines between every possible pair to check for overlaps. Tally the checks as O(N²).</td>
+                    <td><span class="badge-opt">Sorting + Linear Scan</span></td>
+                    <td>The Sweep Line (Timeline)</td>
+                    <td>Sort intervals by start time. Iterate through. If the current interval starts before the previous one ends, merge them by updating the end time to the max of both.</td>
+                    <td>Draw a horizontal timeline. Place intervals as segments above it. Draw a "Merge" bracket joining segments that physically touch or overlap.</td>
+                    <td>Sorting Log-Linearity</td>
+                    <td>Draw an O(N log N) box for sorting, followed by a single straight line O(N) for the merge pass. Total = O(N log N).</td>
+                    <td>Storing multiple intermediate lists of partially merged intervals during the nested loop process.</td>
+                    <td>Draw a single output list. Because we only ever look at the "last merged" interval, space is O(N) (or O(log N) for sorting).</td>
+                </tr>
+
+                <tr>
+                    <td>57</td>
+                    <td><b>Insert Interval</b></td>
+                    <td><span class="badge-bf">Append & Re-Merge</span> Add the new interval to the existing list and then run the full "Merge Intervals" (Q56) logic on the whole set.</td>
+                    <td>The Pipeline Funnel</td>
+                    <td>Draw a list of intervals. Draw an arrow adding one more. Then draw the O(N log N) sorting machine from Q56.</td>
+                    <td><span class="badge-opt">Three-Phase Linear Scan</span></td>
+                    <td>The Categorized Conveyor</td>
+                    <td>Iterate once. 1: Add all intervals that end before the new one starts. 2: Merge all overlapping intervals into one. 3: Add the merged result and all remaining intervals.</td>
+                    <td>Draw three shaded regions on a timeline: "Left (No Overlap)", "Middle (Merging Zone)", and "Right (Remaining)". Place the intervals into their respective regions.</td>
+                    <td>Single Linear Pass</td>
+                    <td>Draw a single straight arrow from index 0 to N. We decide the fate of each interval in a single check. O(N) time.</td>
+                    <td>O(N log N) time/space overhead due to re-sorting an almost-sorted list.</td>
+                    <td>Draw a single result list. We build it element-by-element in one pass. O(N) space.</td>
+                </tr>
+
+                <tr>
+                    <td>58</td>
+                    <td><b>Length of Last Word</b></td>
+                    <td><span class="badge-bf">Trim & Split</span> Trim the string, split it by spaces into an array of strings, and return the length of the last element in that array.</td>
+                    <td>The Array Funnel</td>
+                    <td>Draw a long string. Draw a "Split" machine that breaks it into many smaller boxes. Point to the last box. Note the O(N) space for the array.</td>
+                    <td><span class="badge-opt">Backward Pointer Scan</span></td>
+                    <td>The Reverse Scanner</td>
+                    <td>Start a pointer at the end of the string. Move it left to skip any trailing spaces. Then, count characters until you hit a space or the start of the string.</td>
+                    <td>Draw the string with an arrow at the very end pointing left. Draw the arrow hopping over empty spaces, then dragging through the letters of the last word.</td>
+                    <td>Partial Scan Line</td>
+                    <td>Draw a line representing the string length N. Draw a shorter arrow starting from the end and stopping early. O(N) worst case.</td>
+                    <td>Draw an array of all words in the string occupying heap memory. O(N) space.</td>
+                    <td>Draw exactly one integer variable `length`. No extra arrays or strings. O(1) space.</td>
+                </tr>
+
+                <tr>
+                    <td>59</td>
+                    <td><b>Spiral Matrix II</b></td>
+                    <td><span class="badge-bf">Hardcoded Directions</span> Attempt to write if-else logic for every single turn based on fixed coordinate boundaries (difficult to generalize).</td>
+                    <td>The Manual Maze</td>
+                    <td>Draw a grid and manually trace a path. Note how complex the logic becomes without a systemic "boundary" approach.</td>
+                    <td><span class="badge-opt">Boundary Contraction</span></td>
+                    <td>The Concentric Square Shrink</td>
+                    <td>Define Top, Bottom, Left, and Right boundaries. Fill the Top row and move the Top boundary down. Fill the Right col and move the Right boundary left. Repeat until full.</td>
+                    <td>Draw a square grid. Draw four arrows (T, B, L, R) pointing inward. As you finish a side, physically move that arrow's line one step toward the center.</td>
+                    <td>Perfect Grid Filling</td>
+                    <td>Draw an N x N grid. Shade every cell exactly once. Total operations = N². O(N²) time.</td>
+                    <td>N/A - Standard simulation is required to build the output.</td>
+                    <td>Draw the resulting N x N matrix. No extra auxiliary data structures are used. O(1) extra space (ignoring output).</td>
+                </tr>
+
+                <tr>
+                    <td>60</td>
+                    <td><b>Permutation Sequence</b></td>
+                    <td><span class="badge-bf">Generate & Sort</span> Use backtracking to generate all N! permutations, sort them alphabetically, and return the k-th element.</td>
+                    <td>The Factorial Tree</td>
+                    <td>Draw a tree that branches N! times. Note that for N=9, this is 362,880 strings. Write O(N! * N) time.</td>
+                    <td><span class="badge-opt">Factorial Number System (Math)</span></td>
+                    <td>The Bucket Selection</td>
+                    <td>Use math to determine which digit must be at each position. For the first position, there are (N-1)! permutations for each starting digit. Use `(k-1) / (n-1)!` to pick the digit.</td>
+                    <td>Draw a set of digits {1, 2, 3, 4}. Use the formula to "pluck" one number out and place it in the result. Repeat with the remaining smaller set.</td>
+                    <td>Iterative Calculation</td>
+                    <td>Draw N steps. At each step, show a small division operation and a digit removal. O(N²) time (due to list removal).</td>
+                    <td>Draw a massive list in memory holding N! strings. O(N! * N) space.</td>
+                    <td>Draw a small list of N digits and the result string. O(N) space.</td>
+                </tr>
+
+                <tr>
+                    <td>61</td>
+                    <td><b>Rotate List</b></td>
+                    <td><span class="badge-bf">Step-by-Step Rotation</span> For each of the $k$ rotations, find the second-to-last node, make it the new tail, and move the old tail to the head.</td>
+                    <td>The Repeating Cycle</td>
+                    <td>Draw a linked list. Draw an arrow circling from the end back to the start. Note that you traverse the whole list $k$ times. Time: $O(N \times K)$.</td>
+                    <td><span class="badge-opt">The Circular Link (Ring)</span></td>
+                    <td>The Bracelet Snap</td>
+                    <td>Connect the tail to the head to form a circle. Calculate the effective rotation ($k \% length$). Find the node at position ($length - (k \% length)$), make it the new tail by setting its `next` to null, and return the node after it as the new head.</td>
+                    <td>Draw the list. Draw a curved line connecting the last node back to the first. Then, draw a "scissor" icon cutting the link at the specific index to turn the circle back into a line.</td>
+                    <td>Two-Pass Linear</td>
+                    <td>Draw one arrow measuring the length ($O(N)$) and a second arrow moving to the cut point ($O(N)$). Total time: $O(N)$.</td>
+                    <td>O(1) space, but high time complexity due to redundant traversals.</td>
+                    <td>Draw exactly one circular structure in memory. Only pointer references are changed. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>62</td>
+                    <td><b>Unique Paths</b></td>
+                    <td><span class="badge-bf">Pure Recursion (DFS)</span> From `(0,0)`, recursively call `moveRight()` and `moveDown()` until you hit the bottom-right corner.</td>
+                    <td>The Binary Explosion Tree</td>
+                    <td>Draw a root node `(0,0)`. It splits into two branches: `(0,1)` and `(1,0)`. Each of those splits again. Highlight the massive number of overlapping subproblems. Time: $O(2^{m+n})$.</td>
+                    <td><span class="badge-opt">Dynamic Programming (1D/2D)</span></td>
+                    <td>The Pascal Triangle Map</td>
+                    <td>The number of ways to reach a cell is the sum of ways to reach the cell above it and the cell to its left. Fill the grid row by row.</td>
+                    <td>Draw an $M \times N$ grid. Fill the first row and column with 1s. For cell `(1,1)`, look at the 1 above and 1 to the left; write '2' in the cell. Continue summing neighbors.</td>
+                    <td>Matrix Fill Area</td>
+                    <td>Draw a rectangle. Shade it in row by row. The time complexity is exactly the area of the rectangle. Time: $O(M \times N)$.</td>
+                    <td>A massive recursion stack with $2^{m+n}$ calls.</td>
+                    <td>Draw a single 1D array (row) that gets updated $M$ times. Space: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>63</td>
+                    <td><b>Unique Paths II</b></td>
+                    <td><span class="badge-bf">Recursion with Check</span> Same as Q62, but add an `if(grid[i][j] == 1) return 0;` condition in the recursive calls.</td>
+                    <td>The Blocked Tree</td>
+                    <td>Draw the recursion tree from Q62, but draw red "X"s on branches that lead to obstacles, showing how the search is terminated.</td>
+                    <td><span class="badge-opt">DP with Obstacle Guard</span></td>
+                    <td>The Detour Grid</td>
+                    <td>Initialize a DP array. If a cell has an obstacle, set its DP value to 0. Otherwise, it is the sum of its top and left neighbors.</td>
+                    <td>Draw the grid with a blacked-out obstacle cell. When filling the grid, if you reach the black cell, write '0' and move on. Show how the sums "flow" around the obstacle.</td>
+                    <td>Single-Pass Grid</td>
+                    <td>Draw an $M \times N$ grid. Show a single traversal pass. Time: $O(M \times N)$.</td>
+                    <td>Heavy recursion stack.</td>
+                    <td>Draw a single 1D array representing the current row being calculated. Space: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>64</td>
+                    <td><b>Minimum Path Sum</b></td>
+                    <td><span class="badge-bf">Exhaustive Search (Recursion)</span> Explore every possible path from top-left to bottom-right, calculating the total sum for each and tracking the minimum.</td>
+                    <td>The Path Finder Tree</td>
+                    <td>Draw a tree branching at every cell. Label each node with the path sum so far. Show how many branches are explored to find the winner. Time: $O(2^{m+n})$.</td>
+                    <td><span class="badge-opt">Dynamic Programming (In-Place)</span></td>
+                    <td>The Cost Accumulator</td>
+                    <td>Each cell in the DP table should store the minimum cost to reach it: `grid[i][j] += min(grid[i-1][j], grid[i][j-1])`.</td>
+                    <td>Draw the grid. For each cell, look at the values above and to the left. Pick the smaller one, add the current cell's value, and write it over the original number.</td>
+                    <td>Cell-by-Cell Calculation</td>
+                    <td>Draw a grid. Show a scanner moving through every cell once. Time: $O(M \times N)$.</td>
+                    <td>Redundant path calculations filling memory.</td>
+                    <td>Draw the original grid being modified in-place. Space: $O(1)$ (if modifying input) or $O(N)$ for a 1D DP row.</td>
+                </tr>
+
+                <tr>
+                    <td>65</td>
+                    <td><b>Valid Number</b></td>
+                    <td><span class="badge-bf">Regex or Nested If-Else</span> Try to use a very complex Regular Expression or a giant series of nested boolean checks for signs, dots, and exponents.</td>
+                    <td>The Spaghetti Logic</td>
+                    <td>Draw a flowchart with 20+ decision diamonds. Highlight how easily one edge case (like "0e") can break the entire logic.</td>
+                    <td><span class="badge-opt">Deterministic Finite Automaton (DFA)</span></td>
+                    <td>The State Machine Rail</td>
+                    <td>Define states (e.g., "Start", "Sign", "Integer", "Dot", "Fraction", "Exponent"). Iterate through the string; each character triggers a transition to a new state. If you end in a "Valid" state, return true.</td>
+                    <td>Draw 6-8 circles (States). Draw arrows between them labeled with types (Digit, '.', 'e', '+/-'). Trace the string "3.14e-10" as a marble rolling from circle to circle.</td>
+                    <td>Finite State Transition</td>
+                    <td>Draw a single straight line representing the string length $N$. At each character, show a single lookup in a "state table." Time: $O(N)$.</td>
+                    <td>No significant extra memory, but the logic is extremely prone to human error.</td>
+                    <td>Draw a small 2D table (States $\times$ Inputs). The space is $O(1)$ because the table size is fixed regardless of string length.</td>
+                </tr>
+
+                <tr>
+                    <td>66</td>
+                    <td><b>Plus One</b></td>
+                    <td><span class="badge-bf">Int Conversion</span> Convert the array of digits into a large integer, add 1, then convert it back into an array of digits.</td>
+                    <td>The Overflow Funnel</td>
+                    <td>Draw an array. Draw a funnel turning it into a single huge number. Note that for large arrays (100+ digits), this exceeds standard integer limits, causing a crash.</td>
+                    <td><span class="badge-opt">Reverse Linear Scan</span></td>
+                    <td>The Ripple Effect</td>
+                    <td>Start from the last digit. If it's less than 9, increment and return. If it's 9, turn it to 0 and move left. If you reach the front and it's still 9, prepend a 1.</td>
+                    <td>Draw the array `[9, 9, 9]`. Start at the end. Change 9 to 0, move left. Change 9 to 0, move left. Change 9 to 0. Draw a "New Box" at the front and put '1' inside.</td>
+                    <td>Single Backward Arrow</td>
+                    <td>Draw a line of length $N$. Draw an arrow moving right-to-left. In the best case, it stops at the first step. Worst case, it touches every element once. $O(N)$.</td>
+                    <td>Allocating a massive BigInt or string to hold the intermediate number.</td>
+                    <td>Draw the original array. In most cases, it is modified in-place ($O(1)$). Only in the "all nines" case is a new array of size $N+1$ created ($O(N)$).</td>
+                </tr>
+
+                <tr>
+                    <td>67</td>
+                    <td><b>Add Binary</b></td>
+                    <td><span class="badge-bf">Base-2 to Base-10</span> Convert both binary strings to decimal integers, add them, and convert the result back to a binary string.</td>
+                    <td>The Base Converter</td>
+                    <td>Draw two binary strings. Draw a conversion machine outputting base-10 numbers. Note the overflow risk for strings longer than 64 bits.</td>
+                    <td><span class="badge-opt">Two-Pointer Bitwise Addition</span></td>
+                    <td>The Vertical Adder</td>
+                    <td>Align strings by the end. Add bits digit-by-digit along with a `carry` variable (0 or 1). Use modulo for the bit and division for the carry.</td>
+                    <td>Stack "1010" and "1011". Draw vertical columns. $0+1=1$, carry 0. $1+1=0$, carry 1. $0+0+1=1$, carry 0. $1+1=0$, carry 1. Result: "10101".</td>
+                    <td>Parallel Linear Scan</td>
+                    <td>Draw two lines representing string lengths $M$ and $N$. Draw a scanner moving from right to left once. Time: $O(\max(M, N))$.</td>
+                    <td>Heavy memory usage for BigInt objects or intermediate decimal strings.</td>
+                    <td>Draw a StringBuilder or character array of size $\max(M, N) + 1$. Space: $O(\max(M, N))$.</td>
+                </tr>
+
+                <tr>
+                    <td>68</td>
+                    <td><b>Text Justification</b></td>
+                    <td><span class="badge-bf">Trial and Error Padding</span> Try adding words to a line; if it exceeds `maxWidth`, try adding different amounts of spaces between words until it looks right.</td>
+                    <td>The Brute Force Typesetter</td>
+                    <td>Draw a box of width $W$. Try putting words in and drawing random space gaps, recalculating constantly. $O(N^2)$ or $O(N \times W)$ complexity.</td>
+                    <td><span class="badge-opt">Greedy Word Packing + Round Robin Spacing</span></td>
+                    <td>The Balanced Scale</td>
+                    <td>Pack as many words as possible. Calculate total spaces needed. Distribute spaces evenly. If there's a remainder, add extra spaces to the left-most gaps first. Handle the last line as left-justified.</td>
+                    <td>Draw a line with 3 words. Space needed = 7. Gaps = 2. $7 / 2 = 3$ spaces each, with 1 remainder. Give 4 spaces to gap 1 and 3 spaces to gap 2.</td>
+                    <td>Linear Word Processing</td>
+                    <td>Draw a line of words. Show a pointer moving through the words once to group them into lines. Each word is processed exactly once. Time: $O(N)$.</td>
+                    <td>Storing multiple copies of strings during the padding/recalculation phase.</td>
+                    <td>Draw the final list of strings. Space is $O(N)$ to store the output text. No significant auxiliary structures are used.</td>
+                </tr>
+
+                <tr>
+                    <td>69</td>
+                    <td><b>Sqrt(x)</b></td>
+                    <td><span class="badge-bf">Linear Search</span> Start from $1, 2, 3...$ and square each number until $i \times i > x$. The answer is $i-1$.</td>
+                    <td>The Incrementing Bar</td>
+                    <td>Draw a number line. Draw a pointer starting at 1 and stepping right one unit at a time. The distance traveled can be up to $\sqrt{x}$. Time: $O(\sqrt{x})$.</td>
+                    <td><span class="badge-opt">Binary Search (Range [0, x])</span></td>
+                    <td>The Half-Way Cut</td>
+                    <td>Search in the range $[0, x]$. If $mid \times mid > x$, search the left half. If $mid \times mid \le x$, record $mid$ and search the right half to find a larger potential root.</td>
+                    <td>Draw a line from $0$ to $100$. Mark $50$. $50^2 = 2500$ (Too big). Cut range to $[0, 49]$. Mark $25$. $25^2 = 625$ (Too big). Repeat until range collapses.</td>
+                    <td>Logarithmic Halving</td>
+                    <td>Draw a block representing $x$. Draw a line cutting it in half, then half again. Total steps = $\log(x)$. Time: $O(\log x)$.</td>
+                    <td>$O(1)$ space.</td>
+                    <td>Draw exactly three variables: `low`, `high`, `mid`. $O(1)$ space.</td>
+                </tr>
+
+                <tr>
+                    <td>70</td>
+                    <td><b>Climbing Stairs</b></td>
+                    <td><span class="badge-bf">Recursion (DFS)</span> To reach step $n$, you could have come from $n-1$ or $n-2$. $f(n) = f(n-1) + f(n-2)$.</td>
+                    <td>The Exponential Tree</td>
+                    <td>Draw a root node $N$. Branch to $N-1$ and $N-2$. Each of those branches again. Highlight the massive redundancy (e.g., $N-3$ is calculated many times). Time: $O(2^N)$.</td>
+                    <td><span class="badge-opt">Iterative DP (Fibonacci)</span></td>
+                    <td>The Staircase Build-up</td>
+                    <td>The number of ways to reach the current step is the sum of ways to reach the previous two steps. Use two variables to store only the last two results.</td>
+                    <td>Draw steps $1, 2, 3, 4, 5$. Under step 1, write '1'. Under step 2, write '2'. For step 3, add $1+2=3$. For step 4, add $2+3=5$.</td>
+                    <td>Single Forward Arrow</td>
+                    <td>Draw a line of length $N$. Draw a pointer moving from $1$ to $N$ once. Time: $O(N)$.</td>
+                    <td>A recursion stack of depth $N$ with $2^N$ total calls.</td>
+                    <td>Draw just two variables: `first` and `second`. No array or recursion used. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>71</td>
+                    <td><b>Simplify Path</b></td>
+                    <td><span class="badge-bf">Regex Substitution</span> Use complex regular expressions to repeatedly replace "/./" with "/" and multiple "///" with "/", while trying to manually handle ".." via string searches.</td>
+                    <td>The Multi-Pass Filter</td>
+                    <td>Draw a string. Draw three separate machines it must pass through. Show how ".." requires the string to be "re-scanned" from the beginning multiple times. $O(N^2)$.</td>
+                    <td><span class="badge-opt">Stack (Push/Pop on Chunks)</span></td>
+                    <td>The Directory Breadcrumb</td>
+                    <td>Split the string by "/". Iterate through the components. If it's a folder name, push to stack. If it's "..", pop from stack. If it's "." or empty, ignore it. Join at the end.</td>
+                    <td>Draw a vertical stack. For "/home/user/../docs/./", push "home", push "user". Encounter "..", pop "user". Encounter "docs", push "docs". Result: "/home/docs".</td>
+                    <td>Linear Token Scan</td>
+                    <td>Draw a line representing the path length $N$. Show a pointer moving through it exactly once. Time: $O(N)$.</td>
+                    <td>Creating multiple intermediate string copies for every ".." found.</td>
+                    <td>Draw a single stack containing only the final valid folder names. Space: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>72</td>
+                    <td><b>Edit Distance</b></td>
+                    <td><span class="badge-bf">Brute Force Recursion</span> For every character mismatch, recursively try all three operations: Insert, Delete, and Replace. Pick the path with the minimum count.</td>
+                    <td>The Ternary Explosion Tree</td>
+                    <td>Draw a root node. From it, draw 3 branches. From each of those, draw 3 more. Label branches as "Ins", "Del", "Rep". Highlight the overlapping subproblems. Time: $O(3^N)$.</td>
+                    <td><span class="badge-opt">2D Dynamic Programming</span></td>
+                    <td>The Alignment Grid</td>
+                    <td>Create an $(M+1) \times (N+1)$ matrix. `dp[i][j]` represents the distance between `word1[0...i]` and `word2[0...j]`. If chars match, take diagonal value. If not, take `1 + min(top, left, diagonal)`.</td>
+                    <td>Draw a grid with "horse" on top and "ros" on left. Fill cell by cell. Show how each cell "looks" at its 3 neighbors to the top and left to find the cheapest path.</td>
+                    <td>Matrix Area Shade</td>
+                    <td>Draw a rectangle of size $M \times N$. Shade every cell once. Time: $O(M \times N)$.</td>
+                    <td>A massive recursion stack with $3^{\max(M,N)}$ potential calls.</td>
+                    <td>Draw the $(M \times N)$ table. Note that you only need the previous row to calculate the current one, so space can be optimized to $O(\min(M, N))$.</td>
+                </tr>
+
+                <tr>
+                    <td>73</td>
+                    <td><b>Set Matrix Zeroes</b></td>
+                    <td><span class="badge-bf">Additional Matrix Copy</span> Create a clone of the original $M \times N$ matrix. Whenever you find a 0 in the original, set the entire row and column to 0 in the clone.</td>
+                    <td>The Double Grid</td>
+                    <td>Draw two identical $M \times N$ matrices side-by-side. Draw an arrow from a '0' in Grid A to a full cross of '0's in Grid B. Time: $O(M \times N)$.</td>
+                    <td><span class="badge-opt">In-Place State Marking</span></td>
+                    <td>The Flagship Rows</td>
+                    <td>Use the first row and first column of the matrix itself as markers. If `matrix[i][j]` is 0, set `matrix[i][0]` and `matrix[0][j]` to 0. Then, iterate again to fill zeroes based on those markers.</td>
+                    <td>Draw a grid. When you hit a 0 at `(2,3)`, draw an arrow pointing to the "0" at the start of Row 2 and the "0" at the top of Col 3. Those are your "flags".</td>
+                    <td>Two-Pass Grid Scan</td>
+                    <td>Draw a grid. Show one pass to set markers ($O(MN)$) and a second pass to apply markers ($O(MN)$). Time: $O(M \times N)$.</td>
+                    <td>Draw a completely separate $M \times N$ array taking up extra memory. Space: $O(M \times N)$.</td>
+                    <td>Draw the original grid. Highlight that only 2 extra boolean variables (for the first row/col) are needed. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>74</td>
+                    <td><b>Search a 2D Matrix</b></td>
+                    <td><span class="badge-bf">Linear Search</span> Treat the 2D matrix like a list and check every single element one-by-one until the target is found.</td>
+                    <td>The Snaking Arrow</td>
+                    <td>Draw a grid. Draw a single long arrow snaking through every row from top to bottom. Time: $O(M \times N)$.</td>
+                    <td><span class="badge-opt">Binary Search (Flattened Index)</span></td>
+                    <td>The Virtual 1D Array</td>
+                    <td>Since the matrix is sorted, treat it as a single 1D array of size $M \times N$. Use `mid / cols` for row and `mid % cols` for column index. Perform standard binary search.</td>
+                    <td>Draw a grid. Label cells from 0 to 11. Pick `mid = 5`. Draw the math: $5 / 4 = \text{Row } 1$, $5 \% 4 = \text{Col } 1$. Target the cell `(1,1)` and split the virtual array.</td>
+                    <td>Halving Block</td>
+                    <td>Draw a line representing $M \times N$ elements. Show it being cut in half repeatedly. Time: $O(\log(M \times N))$.</td>
+                    <td>$O(1)$ space.</td>
+                    <td>Draw three pointers (`low`, `high`, `mid`) and the column count variable. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>75</td>
+                    <td><b>Sort Colors</b></td>
+                    <td><span class="badge-bf">Standard Library Sort</span> Simply call `Arrays.sort()` or `sort()`. While fast, it uses $O(N \log N)$ and doesn't exploit the fact that there are only 3 unique values.</td>
+                    <td>The Generic Sorter</td>
+                    <td>Draw a box labeled "QuickSort". Put `[2,0,2,1,1,0]` in, get `[0,0,1,1,2,2]` out. Note the $O(N \log N)$ cost.</td>
+                    <td><span class="badge-opt">Dutch National Flag (3-Pointer)</span></td>
+                    <td>The Three-Zone Divider</td>
+                    <td>Maintain 3 pointers: `low` (boundary for 0s), `mid` (current element), and `high` (boundary for 2s). If `mid` is 0, swap with `low`. If 2, swap with `high`. If 1, just move `mid`.</td>
+                    <td>Draw an array. Place `L` at the start, `H` at the end, `M` in the middle. Show 0s being kicked to the left of `L` and 2s being kicked to the right of `H`.</td>
+                    <td>One-Pass Triple Pointer</td>
+                    <td>Draw a line of length $N$. Show the `mid` pointer traversing it exactly once. Time: $O(N)$.</td>
+                    <td>Depends on the library sort ($O(N)$ or $O(\log N)$).</td>
+                    <td>Draw the array being modified in-place with just 3 integer pointers. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>76</td>
+                    <td><b>Minimum Window Substring</b></td>
+                    <td><span class="badge-bf">All Substrings + Map Check</span> Generate every possible substring of $S$ ($O(N^2)$) and for each one, check if it contains all characters of $T$ ($O(N)$).</td>
+                    <td>The Cubic Scanner</td>
+                    <td>Draw a long string. Below it, draw hundreds of smaller lines representing every possible slice. For each slice, draw a "Search" arrow scanning for $T$. Time: $O(N^3)$.</td>
+                    <td><span class="badge-opt">Sliding Window (Two Pointers + Map)</span></td>
+                    <td>The Elastic Band</td>
+                    <td>Expand the `right` pointer until the window is "valid" (contains all $T$). Then, contract the `left` pointer as much as possible while keeping it valid. Track the smallest such window.</td>
+                    <td>Draw string $S$ and a frequency map for $T$. As `R` moves, subtract from map. If a map value hits 0, a character is "satisfied." When all are satisfied, move `L` to shrink.</td>
+                    <td>Two Chasing Pointers</td>
+                    <td>Draw a timeline. Show $L$ and $R$ pointers both moving $0 \to N$. Since each moves at most $N$ times, it's $O(N+N) = O(N)$.</td>
+                    <td>Creating thousands of substring objects in memory.</td>
+                    <td>Draw two frequency maps (Target and Current Window). Space is $O(K)$, where $K$ is the size of the character set (e.g., 52 for A-Z, a-z).</td>
+                </tr>
+
+                <tr>
+                    <td>77</td>
+                    <td><b>Combinations</b></td>
+                    <td><span class="badge-bf">Permutation Filtering</span> Generate all $n!$ permutations of numbers $1 \dots n$, then filter out duplicates and keep only those of length $k$.</td>
+                    <td>The Factorial Filter</td>
+                    <td>Draw a massive tree of all permutations. Draw a "Sieve" at the bottom that only lets through unique combinations. Time: $O(N!)$.</td>
+                    <td><span class="badge-opt">Backtracking (DFS + Lexicographic)</span></td>
+                    <td>The Growing Chain</td>
+                    <td>Build the combination one number at a time. To avoid duplicates, only pick numbers *larger* than the last one picked. If length hits $k$, save the result.</td>
+                    <td>Draw a tree starting at root. Branch to 1, 2, 3... From 1, branch only to 2, 3... (skipping 1). From 2, branch only to 3... (skipping 1, 2).</td>
+                    <td>Binomial Coefficient Tree</td>
+                    <td>Draw a tree where each level adds a digit. The number of leaf nodes is exactly $\binom{n}{k}$. Time: $O(\binom{n}{k} \times k)$.</td>
+                    <td>Massive $O(N!)$ lists stored before filtering.</td>
+                    <td>Draw the recursion stack (depth $k$) and a single array `path` that is modified in-place. Space: $O(k)$.</td>
+                </tr>
+
+                <tr>
+                    <td>78</td>
+                    <td><b>Subsets</b></td>
+                    <td><span class="badge-bf">Recursion (All Paths)</span> For every element, branch the recursion: "Include this element" vs "Exclude this element."</td>
+                    <td>The Power Set Tree</td>
+                    <td>Draw a binary tree. At each level, the tree doubles in size. By level $N$, there are $2^N$ nodes. Time: $O(2^N)$.</td>
+                    <td><span class="badge-opt">Cascading / Bitmasking</span></td>
+                    <td>The Doubling List</td>
+                    <td>Start with an empty set `[[]]`. For every new number, take all existing subsets, add the new number to them, and merge them back into the list.</td>
+                    <td>Start: `[[]]`. Next (1): `[[], [1]]`. Next (2): Take existing, add 2: `[2], [1, 2]`. Result: `[[], [1], [2], [1, 2]]`.</td>
+                    <td>Exponential Growth Bar</td>
+                    <td>Draw a bar that doubles in length for every step. Total operations: $2^0 + 2^1 + \dots + 2^{N-1}$. Time: $O(N \times 2^N)$.</td>
+                    <td>Recursive call stack depth of $N$.</td>
+                    <td>Draw the output list growing exponentially. Auxiliary space is just the current path: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>79</td>
+                    <td><b>Word Search</b></td>
+                    <td><span class="badge-bf">BFS from Every Cell</span> From every cell `(r, c)`, start a Breadth-First Search to find the word. (Harder to track "visited" cells across paths).</td>
+                    <td>The Exploding Ripple</td>
+                    <td>Draw a grid. From one cell, draw ripples spreading in all 4 directions. Show how keeping track of visited cells per path becomes a memory nightmare.</td>
+                    <td><span class="badge-opt">Backtracking (DFS + In-Place Mark)</span></td>
+                    <td>The Ant on a Grid</td>
+                    <td>For each cell, start a DFS. If the char matches, mark the cell as "#" (visited), recurse to neighbors, then change it back (backtrack).</td>
+                    <td>Draw a 2D grid. Trace a path $A \to B \to C$. At $C$, if there's no match, "undo" the path $C \to B \to A$ to try a different direction from $B$.</td>
+                    <td>Bounded 4-ary Tree</td>
+                    <td>Draw a tree where each node has 3 branches (can't go back). Depth is $L$ (word length). Total time: $O(N \times M \times 3^L)$.</td>
+                    <td>$O(N \times M)$ "visited" arrays for every single path explored.</td>
+                    <td>Draw the grid. Highlight that no extra matrix is used—only the recursion stack of depth $L$. Space: $O(L)$.</td>
+                </tr>
+
+                <tr>
+                    <td>80</td>
+                    <td><b>Remove Duplicates from Sorted Array II</b></td>
+                    <td><span class="badge-bf">Frequency Map + New Array</span> Count the frequency of every element. Iterate through the map and add each element at most twice to a new array.</td>
+                    <td>The Counting Bucket</td>
+                    <td>Draw the array. Draw a "Tally" table next to it. Draw a new array below. Show elements being copied only if their tally is $\le 2$.</td>
+                    <td><span class="badge-opt">Two Pointers (Slow/Fast with Offset)</span></td>
+                    <td>The Smart Overwriter</td>
+                    <td>A `slow` pointer marks where the next valid element goes. A `fast` pointer scans. If the current element is different from the element at `slow - 2`, it's valid.</td>
+                    <td>Draw an array. Place `S` at index 2, `F` at index 2. Compare `arr[F]` with `arr[S-2]`. If different, write `arr[F]` to `arr[S]` and move `S`.</td>
+                    <td>Single Linear Pass</td>
+                    <td>Draw a single straight arrow from left to right. One pass through the data. Time: $O(N)$.</td>
+                    <td>A Hash Map and a new array of size $N$. Space: $O(N)$.</td>
+                    <td>Draw the original array with two pointers. No extra structures. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>81</td>
+                    <td><b>Search in Rotated Sorted Array II</b></td>
+                    <td><span class="badge-bf">Linear Scan</span> Since the array contains duplicates, simply iterate from index 0 to $N-1$ to find the target.</td>
+                    <td>The Constant Speed Walker</td>
+                    <td>Draw a pointer moving step-by-step from start to finish. $O(N)$ time. Point out that the "rotated" property is ignored.</td>
+                    <td><span class="badge-opt">Binary Search (Shrinking Bound)</span></td>
+                    <td>The Shifting Pivot</td>
+                    <td>Use binary search. If `nums[L] == nums[mid] == nums[R]`, we can't tell which side is sorted. Shrink the window by $L++$ and $R--$ until they differ. Then apply standard rotated search logic.</td>
+                    <td>Draw a graph with two plateaus at the same height. Show that if the middle is also that height, we must "step in" from both sides until we find a slope to apply binary search.</td>
+                    <td>Halving with Linear "Worst-Case"</td>
+                    <td>Draw a binary search tree. At the root, draw a small horizontal arrow showing the boundary shrink. Total time: $O(\log N)$ on average, $O(N)$ worst case.</td>
+                    <td>$O(1)$ space.</td>
+                    <td>Draw three pointers ($L, R, mid$) and the shrinking movement of $L/R$. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>82</td>
+                    <td><b>Remove Duplicates from Sorted List II</b></td>
+                    <td><span class="badge-bf">Hash Map Frequency Count</span> Traverse the list and store frequencies in a Map. Traverse again and only include nodes whose count is exactly 1.</td>
+                    <td>The Two-Pass Filter</td>
+                    <td>Draw a linked list. Draw a tally table next to it. Draw a new list being built by skipping any value with a tally $> 1$. $O(N)$ time, $O(N)$ space.</td>
+                    <td><span class="badge-opt">Sentinel Node + Two Pointers</span></td>
+                    <td>The "Delete the Whole Block" Rule</td>
+                    <td>Use a dummy node. Maintain a `prev` pointer. If `curr` has a duplicate next to it, skip the *entire* block of duplicates by pointing `prev.next` to the first non-duplicate node found.</td>
+                    <td>Draw a list `1->2->2->3`. Use a `Dummy`. `prev` stays at 1. When it sees `2->2`, it jumps directly to `3`. Draw the pointer bypassing the entire "2" block.</td>
+                    <td>Single Forward Traverse</td>
+                    <td>Draw a line of length $N$. Show a pointer moving through it once. Even when skipping blocks, every node is visited at most twice. $O(N)$.</td>
+                    <td>Draw a Hash Map storing all values and counts. Space: $O(N)$.</td>
+                    <td>Draw a `Dummy` node and a few pointer variables. All work is done by re-linking existing nodes. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>83</td>
+                    <td><b>Remove Duplicates from Sorted List</b></td>
+                    <td><span class="badge-bf">Compare and Skip</span> For every node, compare it with its `next`. If the values are the same, link the current node to `next.next`.</td>
+                    <td>The Local Comparison</td>
+                    <td>Draw two adjacent nodes. If they match, erase the link to the second one and draw a link to the third. $O(N)$ time.</td>
+                    <td><span class="badge-opt">Single Pass (In-Place)</span></td>
+                    <td>The "Keep the First" Rule</td>
+                    <td>Iterate once. While `curr.next` has the same value as `curr`, delete `curr.next`. Only move the `curr` pointer forward when the next value is different.</td>
+                    <td>Draw `1->1->1->2`. Pointer stays at the first `1`. It deletes the second `1`, then the third `1`. Finally, it moves to `2`.</td>
+                    <td>Single Pass Line</td>
+                    <td>Draw a straight line. Every node is visited once. $O(N)$ time complexity.</td>
+                    <td>N/A - Usually done efficiently.</td>
+                    <td>Draw the list being modified in-place. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>84</td>
+                    <td><b>Largest Rectangle in Histogram</b></td>
+                    <td><span class="badge-bf">All Pairs (Nested Loops)</span> For every pair of bars $(i, j)$, find the minimum height between them and calculate the area.</td>
+                    <td>The Quadratic Area Checker</td>
+                    <td>Draw a histogram. Draw brackets between every possible start and end bar. For each bracket, draw a dashed line at the lowest bar height. $O(N^2)$ time.</td>
+                    <td><span class="badge-opt">Monotonic Stack</span></td>
+                    <td>The Ascending Staircase</td>
+                    <td>Keep a stack of indices with increasing heights. When you see a bar shorter than the top, "pop" the top and calculate the area using the popped height as the minimum.</td>
+                    <td>Draw a stack. Push heights: `[2, 1, 5, 6]`. When `2` comes, it's smaller than the previous height? No. When `1` comes, it pops the taller ones, calculates area, and takes their place.</td>
+                    <td>Linear Stack Pass</td>
+                    <td>Draw a line of length $N$. Every element is pushed once and popped once. $2N$ operations = $O(N)$ time.</td>
+                    <td>Storing min-heights in a 2D matrix or nested loop values.</td>
+                    <td>Draw a vertical stack growing and shrinking. Max space is the number of bars. Space: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>85</td>
+                    <td><b>Maximal Rectangle</b></td>
+                    <td><span class="badge-bf">All Possible Subgrids</span> Check every possible rectangle (top-left to bottom-right) in the matrix to see if it consists only of 1s.</td>
+                    <td>The Brute Force Grid Scanner</td>
+                    <td>Draw a 2D grid. Highlight a small rectangle, then a bigger one, then a taller one. Total combinations: $O(N^2 M^2)$. Checking each takes $O(NM)$. Total: $O(N^3 M^3)$.</td>
+                    <td><span class="badge-opt">DP + Largest Histogram (Q84)</span></td>
+                    <td>The Rising Tide</td>
+                    <td>Treat each row as the "ground" for a histogram. For row $i$, the height of bar $j$ is the number of consecutive 1s ending at `(i, j)`. Run the $O(M)$ histogram algorithm for each row.</td>
+                    <td>Draw a grid. For row 1, heights are `[1, 0, 1]`. For row 2, if there's a 1 below a 1, height becomes 2. Now run the "Histogram" visual on these heights.</td>
+                    <td>Row-by-Row Stack Pass</td>
+                    <td>Draw an $N \times M$ grid. For each of the $N$ rows, you perform an $O(M)$ stack-based scan. Total time: $O(N \times M)$.</td>
+                    <td>Storing every possible rectangle coordinate.</td>
+                    <td>Draw a 1D array of size $M$ that stores the current "heights" as you move down the rows. Space: $O(M)$.</td>
+                </tr>
+
+                <tr>
+                    <td>86</td>
+                    <td><b>Partition List</b></td>
+                    <td><span class="badge-bf">Array Extraction</span> Traverse the list, extract all values into an array, filter them into two lists (less than $x$ and greater/equal to $x$), then rebuild the linked list.</td>
+                    <td>Two Parallel Buckets</td>
+                    <td>Draw a linked list. Draw two empty boxes labeled "Small" and "Large". Draw arrows moving numbers from the list into these boxes. Note the $O(N)$ extra space for the new nodes.</td>
+                    <td><span class="badge-opt">Two Dummy Nodes (Merging Streams)</span></td>
+                    <td>The Hairline Splitter</td>
+                    <td>Create two dummy nodes: `lessHead` and `greaterHead`. Iterate through the list, attaching nodes to either the `less` tail or `greater` tail. Connect the `less` tail to `greaterHead.next` at the end.</td>
+                    <td>Draw the original list. Draw two stars (Dummies). As you move through the list, "sever" the arrow of the current node and point it to the tail of the appropriate dummy list.</td>
+                    <td>Single Linear Pass</td>
+                    <td>Draw a single straight line representing the list. Every node is visited once and its `next` pointer updated once. $O(N)$ time.</td>
+                    <td>Creating an intermediate array and brand new nodes. Space: $O(N)$.</td>
+                    <td>Draw the original nodes only. Emphasize that we are just rearranging existing memory links. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>87</td>
+                    <td><b>Scramble String</b></td>
+                    <td><span class="badge-bf">Pure Recursion</span> For every possible split point $i$ in the string, check if the two halves are scrambled versions of each other (including the case where they are swapped).</td>
+                    <td>The Exponential Tree of Splits</td>
+                    <td>Draw a string. Split it in the middle. From each split, draw two more branches (Stay vs Swap). The tree depth is $N$. Time: $O(4^N)$ or $O(N!)$ depending on implementation.</td>
+                    <td><span class="badge-opt">3D Dynamic Programming / Memoization</span></td>
+                    <td>The Recursive Pruning Grid</td>
+                    <td>Use a Map to store `(s1, s2)` pairs that have already been checked. Before checking a split, verify that both strings have the same character counts (anagram check) to fail early.</td>
+                    <td>Draw a 3D grid where `dp[len][i][j]` represents if `s1[i...i+len]` is a scramble of `s2[j...j+len]`. Fill small lengths first and build up to length $N$.</td>
+                    <td>Pruned Recursive Depth</td>
+                    <td>Draw the recursion tree but draw thick red "X" marks over branches where character counts don't match. Time: $O(N^4)$ for DP.</td>
+                    <td>Deep recursive stack without any memory of previous results.</td>
+                    <td>Draw a Hash Map (Memoization table) storing string pairs. Space: $O(N^4)$ for the DP table.</td>
+                </tr>
+
+                <tr>
+                    <td>88</td>
+                    <td><b>Merge Sorted Array</b></td>
+                    <td><span class="badge-bf">Append and Sort</span> Copy all elements of `nums2` into the empty slots of `nums1`, then call `sort()`.</td>
+                    <td>The Messy Pile Sorter</td>
+                    <td>Draw `nums1` with empty space at the end. Dump `nums2` into that space. Draw a big circle around it labeled "O(N log N) Sort".</td>
+                    <td><span class="badge-opt">Three Pointers (Backward Fill)</span></td>
+                    <td>The Reverse Zipper</td>
+                    <td>Start three pointers: `p1` at the last actual element of `nums1`, `p2` at the end of `nums2`, and `p` at the very end of `nums1`'s memory. Fill `nums1` from right to left with the larger value.</td>
+                    <td>Draw `nums1` and `nums2`. Place `p` at the far right of `nums1`. Compare `p1` and `p2`. Whichever is bigger moves to `p`, then `p` and that pointer move left.</td>
+                    <td>Single Backward Pass</td>
+                    <td>Draw a line representing the total length $M+N$. Show the `p` pointer moving from right to left exactly once. Time: $O(M+N)$.</td>
+                    <td>O(N log N) or O(N) depending on sorting overhead.</td>
+                    <td>Draw the `nums1` array being filled in place. No extra arrays are created. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>89</td>
+                    <td><b>Gray Code</b></td>
+                    <td><span class="badge-bf">Backtracking with Visited Set</span> Generate all possible binary strings and use backtracking to find a sequence where each number differs by only one bit from the previous, avoiding the visited set.</td>
+                    <td>The Bit-Flip Maze</td>
+                    <td>Draw a graph where nodes are binary numbers and edges connect numbers with 1-bit difference. Trace a path that hits every node once (Hamiltonian path). O(2^N) time.</td>
+                    <td><span class="badge-opt">Iterative Mirroring / Bitwise Formula</span></td>
+                    <td>The Binary Reflective Symmetry</td>
+                    <td>Start with `[0]`. For each bit $i$ from $0$ to $n-1$, take the current list, reverse it, add $2^i$ to each element, and append it to the original list. Or use the formula: $G(i) = i \oplus (i \gg 1)$.</td>
+                    <td>Draw a list: `0, 1`. Mirror it: `1, 0`. Add $2^1$ (which is 2) to the mirrored part: `2, 3`. New list: `0, 1, 3, 2`.</td>
+                    <td>Exponential List Growth</td>
+                    <td>Draw a bar that doubles in length $N$ times. Total elements = $2^N$. Time: $O(2^N)$.</td>
+                    <td>Recursion stack and visited set taking up $O(2^N)$ space.</td>
+                    <td>Draw the final result list. The iterative logic uses no recursion or extra sets. Space: $O(2^N)$ (for the output) or $O(1)$ auxiliary.</td>
+                </tr>
+
+                <tr>
+                    <td>90</td>
+                    <td><b>Subsets II</b></td>
+                    <td><span class="badge-bf">Subsets I + Hash Set</span> Generate all $2^N$ subsets using the standard recursion and put each one into a Hash Set to filter out duplicates.</td>
+                    <td>The Sieve of Power Sets</td>
+                    <td>Draw the binary tree from Q78. At the bottom, show duplicate sets (like `[1, 2]` and `[1, 2]`) hitting a wall that only lets one through. Time: $O(N \cdot 2^N)$.</td>
+                    <td><span class="badge-opt">Sort + Backtracking (Sibling Skip)</span></td>
+                    <td>The Pruned Choice Tree</td>
+                    <td>Sort the array first. During recursion, if the current element is the same as the previous one at the same level, skip it. This ensures each duplicate is only used once to start a sequence.</td>
+                    <td>Draw a tree for `[1, 2, 2]`. From the root, branch to 1 and the *first* 2. Put a red "X" through the branch for the *second* 2, saying "Already picked a 2 here."</td>
+                    <td>Pruned Exponential Tree</td>
+                    <td>Draw a tree where many branches are cut off. The number of nodes is still bounded by $2^N$, but much smaller for many duplicates. Time: $O(N \cdot 2^N)$.</td>
+                    <td>Storing $2^N$ subsets in a Hash Set for deduplication.</td>
+                    <td>Draw a single recursion stack (depth $N$) and one `path` array. No Hash Set needed. Space: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>91</td>
+                    <td><b>Decode Ways</b></td>
+                    <td><span class="badge-bf">Pure Recursion</span> At each index, branch into two paths: one taking a single digit, and one taking two digits (if valid). Count total leaf nodes.</td>
+                    <td>The Binary Branching Tree</td>
+                    <td>Draw a string like "121". Branch into '1' and '12'. From '1', branch into '2' and '21'. Note how many paths repeat the same sub-string calculations. $O(2^N)$.</td>
+                    <td><span class="badge-opt">1D Dynamic Programming (Fibonacci-like)</span></td>
+                    <td>The Staircase with Conditions</td>
+                    <td>$dp[i]$ is the number of ways to decode the prefix of length $i$. It’s the sum of $dp[i-1]$ (if the last digit is $\neq 0$) and $dp[i-2]$ (if the last two digits form a number $10-26$).</td>
+                    <td>Draw a line of cells. For each cell, look back at the previous one and the one before that. Draw arrows showing the "flow" of counts, but only if the decoding rules allow it.</td>
+                    <td>Single Forward Scan</td>
+                    <td>Draw a straight arrow from index 0 to $N$. One pass, constant work per step. $O(N)$ time.</td>
+                    <td>A massive recursion stack with $2^N$ calls.</td>
+                    <td>Draw just two variables (`prev1`, `prev2`) storing the counts of the last two states. $O(1)$ auxiliary space.</td>
+                </tr>
+
+                <tr>
+                    <td>92</td>
+                    <td><b>Reverse Linked List II</b></td>
+                    <td><span class="badge-bf">Extract, Reverse, Rebuild</span> Traverse to the sub-segment, copy the nodes into an array, reverse the array, and update the node values in the list.</td>
+                    <td>The Array Buffer</td>
+                    <td>Draw a linked list. Circle a middle section. Draw an arrow moving those nodes into a temporary box, flipping them, and shoving them back. $O(N)$ space.</td>
+                    <td><span class="badge-opt">In-Place "Leapfrog" Reversal</span></td>
+                    <td>The Needle and Thread</td>
+                    <td>Use a `dummy` node and a `pre` pointer to the node before the reversal. Repeatedly move the `curr.next` node to the position right after `pre`.</td>
+                    <td>Draw `pre -> curr -> next -> ...`. Draw a "jump" arrow where `curr` skips `next` to point to `next.next`, and `next` is "re-threaded" to point to where `pre.next` was.</td>
+                    <td>Single Segment Pass</td>
+                    <td>Draw a line. Shade the specific segment $[left, right]$. Show the pointer traversing it once. $O(N)$ time.</td>
+                    <td>Draw an array or list of size $(right - left)$ in the heap. Space: $O(N)$.</td>
+                    <td>Draw the list with 4 pointers (`pre`, `curr`, `then`, `dummy`). All work is done by re-linking existing memory. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>93</td>
+                    <td><b>Restore IP Addresses</b></td>
+                    <td><span class="badge-bf">3-Way Nested Loops</span> Use three nested loops to place three dots in all possible positions. For each combination, check if all 4 resulting segments are valid (0-255, no leading zeros).</td>
+                    <td>The Dot Slicer</td>
+                    <td>Draw a string of 12 digits. Draw three vertical lines (dots) at every possible gap. Note that the number of checks is constant but logically $O(N^3)$.</td>
+                    <td><span class="badge-opt">Backtracking with Pruning</span></td>
+                    <td>The 4-Level Decision Tree</td>
+                    <td>Recursively place a dot after 1, 2, or 3 digits. If a segment is invalid or you run out of string before placing 4 segments, backtrack immediately.</td>
+                    <td>Draw a tree with a maximum depth of 4. From the root, branch 1, 2, or 3 digits. If you branch "300", put a red "X" through it because it's $> 255$.</td>
+                    <td>Finite Branching Tree</td>
+                    <td>Draw a tree with 4 levels. Each node has max 3 branches. The total number of nodes is strictly limited. $O(1)$ time in practice, or $O(3^4)$.</td>
+                    <td>Storing every possible (even invalid) dot combination as strings.</td>
+                    <td>Draw the recursion stack (depth 4) and a list for the current segments. Space: $O(1)$ (bounded by IP rules).</td>
+                </tr>
+
+                <tr>
+                    <td>94</td>
+                    <td><b>Binary Tree Inorder Traversal</b></td>
+                    <td><span class="badge-bf">Standard Recursion</span> Visit `left`, then current `node`, then `right`. The system stack handles the "waiting" nodes.</td>
+                    <td>The Depth-First Dive</td>
+                    <td>Draw a tree. Draw a line tracing the perimeter of the tree, starting at the root and hugging the left side until it can't go further, then recording the node. $O(N)$ time.</td>
+                    <td><span class="badge-opt">Iterative with Stack (or Morris)</span></td>
+                    <td>The Manual LIFO Stack</td>
+                    <td>While `curr` is not null, push it to stack and move to `curr.left`. When null, pop from stack, record value, and move to `curr.right`. (Morris is $O(1)$ space).</td>
+                    <td>Draw a tree and a vertical bucket (Stack). Push the left spine of the tree into the bucket. Pop one, then look at its right child and repeat.</td>
+                    <td>Single Node Visit</td>
+                    <td>Draw a tree. Mark each node with a single dot. Total time is exactly the number of nodes. $O(N)$.</td>
+                    <td>Implicit recursion stack of depth $H$ (height of tree). $O(H)$ space.</td>
+                    <td>Draw an explicit Stack structure. Max size is the height of the tree. If using Morris Traversal, draw temporary "threads" (pointers) back to ancestors. Space: $O(H)$ or $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>95</td>
+                    <td><b>Unique Binary Search Trees II</b></td>
+                    <td><span class="badge-bf">Recursive Generation</span> For a range $[1, n]$, pick $i$ as root. Recursively generate all left subtrees from $[1, i-1]$ and all right subtrees from $[i+1, n]$. Combine every left with every right.</td>
+                    <td>The Forest Generator</td>
+                    <td>Draw the number $1, 2, 3$. Pick '2' as root. Draw the possible '1' on the left and '3' on the right. Note the massive repetition of building the same subtrees. $O(4^N/N^{1.5})$.</td>
+                    <td><span class="badge-opt">Recursion with Memoization</span></td>
+                    <td>The Pre-built Subtree Library</td>
+                    <td>Same as brute force, but store the result of `generate(start, end)` in a map. If you need the subtrees for range $[1, 2]$ again, just pull the already-constructed list of trees.</td>
+                    <td>Draw a Map where the Key is the range (e.g., "1-3") and the Value is a list of root pointers. Show the algorithm "checking out" a tree from the library instead of building it.</td>
+                    <td>Catalan Complexity</td>
+                    <td>Draw the growth of Catalan numbers. Time is $O(\text{Catalan}(N) \times N)$, which accounts for the cost of building each tree.</td>
+                    <td>Redundant creation of identical tree structures in the heap.</td>
+                    <td>Draw the memoization map. Note that many large trees actually share pointers to the same smaller subtree nodes in memory. Space: $O(\text{Catalan}(N) \times N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>96</td>
+                    <td><b>Unique Binary Search Trees</b></td>
+                    <td><span class="badge-bf">Pure Recursion</span> For each number $i$ from $1$ to $n$, treat it as the root and recursively calculate the number of unique left subtrees and right subtrees, then multiply them.</td>
+                    <td>The Exploding Recursive Tree</td>
+                    <td>Draw a root node $N=4$. Branch into roots 1, 2, 3, 4. For root 3, show a left branch for $N=2$ and right for $N=1$. Point out how often $G(2)$ is recalculated. $O(3^N)$.</td>
+                    <td><span class="badge-opt">Dynamic Programming (Catalan Number)</span></td>
+                    <td>The Accumulating List</td>
+                    <td>$G(n)$ depends on the results of $G(0) \dots G(n-1)$. Build the solution iteratively: $G(n) = \sum_{i=1}^{n} G(i-1) \times G(n-i)$.</td>
+                    <td>Draw an array `dp` from 0 to $N$. Fill `dp[0]=1, dp[1]=1`. For `dp[3]`, show three pairs of multiplications: $(dp[0] \cdot dp[2]) + (dp[1] \cdot dp[1]) + (dp[2] \cdot dp[0])$.</td>
+                    <td>Nested Summation Scan</td>
+                    <td>Draw two pointers ($i$ and $j$) moving within an array of size $N$. $i$ moves from $1 \to N$, and $j$ scans $0 \to i$. Total operations = $1+2+\dots+N$. Time: $O(N^2)$.</td>
+                    <td>A massive recursion stack with $3^N$ depth and no memory.</td>
+                    <td>Draw a single 1D array of size $N+1$. Space: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>97</td>
+                    <td><b>Interleaving String</b></td>
+                    <td><span class="badge-bf">Recursion with Backtracking</span> Try matching the first char of $s3$ with $s1$. If it matches, recurse. If it doesn't work, backtrack and try matching with $s2$.</td>
+                    <td>The Binary Decision Path</td>
+                    <td>Draw three strings. Draw a decision tree where each node has two choices: "Take from $s1$" or "Take from $s2$". Note the exponential $O(2^{M+N})$ paths.</td>
+                    <td><span class="badge-opt">2D Dynamic Programming</span></td>
+                    <td>The Reachability Grid</td>
+                    <td>$dp[i][j]$ is a boolean: "Can the first $i$ chars of $s1$ and first $j$ chars of $s2$ form the first $i+j$ chars of $s3$?". Fill based on top/left neighbors.</td>
+                    <td>Draw a grid with $s1$ on top and $s2$ on left. Start at $(0,0)$ as `T`. A cell is `T` if (left is `T` AND $s1$ matches $s3$) OR (top is `T` AND $s2$ matches $s3$).</td>
+                    <td>Matrix Area Shade</td>
+                    <td>Draw an $M \times N$ rectangle. Show a single pass through every cell. Time: $O(M \times N)$.</td>
+                    <td>Exhaustive recursion stack of depth $M+N$.</td>
+                    <td>Draw a 1D array representing the current row. We only need the previous state to calculate the current. Space: $O(N)$.</td>
+                </tr>
+
+                <tr>
+                    <td>98</td>
+                    <td><b>Validate Binary Search Tree</b></td>
+                    <td><span class="badge-bf">Local Comparison Only</span> Check if `node.left.val < node.val < node.right.val` for every node. (Fails if a far-left node is greater than a root ancestor).</td>
+                    <td>The Shallow Scanner</td>
+                    <td>Draw a tree where a leaf node violates a root's range but satisfies its parent. Draw a red "X" through the "Local" logic to show it misses the violation.</td>
+                    <td><span class="badge-opt">Recursion with Range (Min/Max)</span></td>
+                    <td>The Descending Constraints</td>
+                    <td>Pass a `low` and `high` boundary down the tree. For a left child, update `high = node.val`. For a right child, update `low = node.val`. If a node is out of bounds, return false.</td>
+                    <td>Draw a tree. At the root, write $(-\infty, \infty)$. For the left child, write $(-\infty, \text{RootValue})$. For the right, $(\text{RootValue}, \infty)$. Keep narrowing the boxes.</td>
+                    <td>Single Node Visit</td>
+                    <td>Draw a tree. Show a single DFS path visiting every node exactly once. Time: $O(N)$.</td>
+                    <td>N/A - Simple recursion.</td>
+                    <td>Draw the recursion stack. The max depth is the tree height $H$. Space: $O(H)$.</td>
+                </tr>
+
+                <tr>
+                    <td>99</td>
+                    <td><b>Recover Binary Search Tree</b></td>
+                    <td><span class="badge-bf">Extract, Sort, Replace</span> Perform an inorder traversal to get all values. Sort the values. Perform a second traversal and replace node values with the sorted ones.</td>
+                    <td>The Sort-and-Swap Funnel</td>
+                    <td>Draw a tree. Draw an arrow extracting values into an array. Draw a sorting machine. Draw arrows putting sorted values back into the tree. $O(N \log N)$.</td>
+                    <td><span class="badge-opt">Morris Inorder Traversal</span></td>
+                    <td>The Temporary Thread</td>
+                    <td>Traverse the tree without a stack/recursion. If you find a spot where `prev.val > curr.val`, record the violation. After the full traversal, swap the two "violation" nodes.</td>
+                    <td>Draw a tree. Draw a "thread" (dashed line) from the right-most node of a left subtree back to the current root. Use this thread to return without a stack.</td>
+                    <td>Constant-Space Walk</td>
+                    <td>Draw a tree and trace the perimeter. Show that every node is visited at most twice. Time: $O(N)$.</td>
+                    <td>An array of size $N$ to store node values. Space: $O(N)$.</td>
+                    <td>Draw the tree. Highlight that only 3 pointer variables (`first`, `second`, `prev`) are used. Space: $O(1)$.</td>
+                </tr>
+
+                <tr>
+                    <td>100</td>
+                    <td><b>Same Tree</b></td>
+                    <td><span class="badge-bf">String Serialization</span> Convert both trees into strings (e.g., "1,2,#,3") and compare the strings for equality.</td>
+                    <td>The String Converter</td>
+                    <td>Draw two trees. Draw an arrow from each to a text box. Compare the text boxes character-by-character. $O(N)$ time but high constant factor.</td>
+                    <td><span class="badge-opt">Recursive DFS (Structural Comparison)</span></td>
+                    <td>The Parallel Mirror</td>
+                    <td>Base cases: if both null, true; if one null, false; if values differ, false. Recurse: `isSame(p.left, q.left) && isSame(p.right, q.right)`.</td>
+                    <td>Draw two identical trees side-by-side. Point to the root of both simultaneously. Move both "fingers" to the left child, then right child, checking for a match at every stop.</td>
+                    <td>Simultaneous Traversal</td>
+                    <td>Draw two trees. Shade nodes in both trees in the same order. Time: $O(N)$ (where $N$ is the smaller tree's size).</td>
+                    <td>Storing full string representations in the heap. Space: $O(N)$.</td>
+                    <td>Draw the recursion stack for one tree. Max depth is tree height $H$. Space: $O(H)$.</td>
+                </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
